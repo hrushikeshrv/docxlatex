@@ -1,5 +1,4 @@
 import zipfile
-import os
 from xml.etree import ElementTree
 
 
@@ -54,10 +53,10 @@ def get_text(doc_path):
     TODOS-
         1. Clean up some equations that convert into linear but do not give valid LaTeX.
     """
-    zipf = zipfile.ZipFile(doc_path)
+    zip_f = zipfile.ZipFile(doc_path)
     text = ''
-    for f in zipf.namelist():
+    for f in zip_f.namelist():
         if f.startswith('word/document') or f.startswith('word/header') or f.startswith('word/footer'):
-            text += xml_to_text(zipf.read(f))
+            text += xml_to_text(zip_f.read(f))
             
     return text
