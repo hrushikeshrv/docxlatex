@@ -3,17 +3,14 @@ from defusedxml import ElementTree
 
 from tagparsers import tag_to_latex, qn
 
-ns_map = {
-    'w': 'http://schemas.openxmlformats.org/wordprocessingml/2006/main',
-    'm': 'http://schemas.openxmlformats.org/officeDocument/2006/math',
-}
-
 
 class Document:
-    def __init__(self, document, inline_delimiter='$', block_delimiter='$$'):
+    def __init__(self, document, inline_delimiter='$', block_delimiter='$$', get_header=False, get_footer=False):
         self.document = document
         self.inline_delimiter = inline_delimiter
         self.block_delimiter = block_delimiter
+        self.get_header_text = get_header
+        self.get_footer_text = get_footer
     
     def get_text(self, get_header_text=False, get_footer_text=False):
         """
@@ -55,7 +52,7 @@ class Document:
         
             if child.tag == qn('w:t'):
                 text += child.text if child.text is not None else ''
-            elif child.tag == qn('m:nary'):
+            elif child.tag == qn('m:oMath'):
                 text += self.inline_delimiter + ' '
                 text += tag_to_latex(child)
                 text += ' ' + self.inline_delimiter
