@@ -1,2 +1,10 @@
 venv/
 .idea/
+
+__pycache__/
+*.pyc
+
+build/
+develop-eggs/
+dist/
+*.egg-info/

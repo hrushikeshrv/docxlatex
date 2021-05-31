@@ -6,7 +6,7 @@ README = (ROOT / "README.md").read_text()
 
 setup(
     name='docxlatex',
-    version='0.1.0',
+    version='0.1.3',
     description='Extract text from .docx files with support for inserted equations',
     long_description=README,
     long_description_content_type='text/markdown',
@@ -20,6 +20,7 @@ setup(
         'Programming Language :: Python :: 3.8'
     ],
     packages=find_packages(exclude=('tests',)),
+    # py_modules=['docxlatex'],
     include_package_data=True,
     install_requires=['defusedxml'],
 )

@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: docxlatex
-Version: 0.1.0
+Version: 0.1.3
 Summary: Extract text from .docx files with support for inserted equations
 Home-page: https://github.com/hrushikeshrv/docxlatex
 Author: Hrushikesh Vaidya

@@ -1,7 +1,7 @@
 import zipfile
 from defusedxml import ElementTree
 
-from tagparsers import tag_to_latex, qn
+from .tagparsers import tag_to_latex, qn
 
 
 class Document:
