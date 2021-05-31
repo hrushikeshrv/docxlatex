@@ -14,6 +14,7 @@ Install using pip
 # Usage
 
 Import the `Document` class from `docxlatex`
+
 ```python
 from docxlatex import Document
 ```

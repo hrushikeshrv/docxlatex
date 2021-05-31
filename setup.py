@@ -6,7 +6,7 @@ README = (ROOT / "README.md").read_text()
 
 setup(
     name='docxlatex',
-    version='0.1.3',
+    version='0.1.4',
     description='Extract text from .docx files with support for inserted equations',
     long_description=README,
     long_description_content_type='text/markdown',
