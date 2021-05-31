@@ -8,22 +8,19 @@ primarily for use with MathJax.
 docxlatex DOES NOT convert the entire .docx file to a LaTeX source file.
 
 # Installation
-Currently not available on PyPI. You can clone this repository for now.
+Install using pip  
+`pip install docxlatex`
 
 # Usage
-Usage is simple.  
-Navigate into the project's directory  
-`cd docxlatex`  
-`cd src`
 
-Start a python shell and import the `Document` class from `docxlatex`
+Import the `Document` class from `docxlatex`
 ```python
 from docxlatex import Document
 ```
 
 Create a `Document` object, giving it the path to the .docx file, and call the `get_text()` method
 ```python
-doc = Document("path\\to\\document")
+doc = Document("path/to/document")
 text = doc.get_text()
 ```
 

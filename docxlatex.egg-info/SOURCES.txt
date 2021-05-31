@@ -1,0 +1,10 @@
+README.md
+setup.py
+docxlatex.egg-info/PKG-INFO
+docxlatex.egg-info/SOURCES.txt
+docxlatex.egg-info/dependency_links.txt
+docxlatex.egg-info/requires.txt
+docxlatex.egg-info/top_level.txt
+src/__init__.py
+src/docxlatex.py
+src/tagparsers.py
