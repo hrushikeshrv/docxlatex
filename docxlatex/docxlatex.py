@@ -1,5 +1,6 @@
 import zipfile
 from defusedxml import ElementTree
+import re
 
 from .tagparsers import tag_to_latex, qn
 
@@ -65,5 +66,6 @@ class Document:
                 text += '\n'
             elif child.tag == qn('w:p'):
                 text += '\n\n'
-    
+        
+        text = re.sub(r'\n(\n+)\$(\s*.+\s*)\$', r'\n\1$$ \2 $$', text)
         return text
