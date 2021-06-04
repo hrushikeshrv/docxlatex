@@ -41,9 +41,6 @@ class Document:
 
             :param xml:str - XML string to be parsed into an xml.etree.Element object.
             :return text:str - The text contained in the tag
-
-            TODO -
-                1. Check for newlines before and after equation and switch to block_delimiter accordingly
             """
         text = ''
         root = ElementTree.fromstring(xml)
@@ -67,5 +64,5 @@ class Document:
             elif child.tag == qn('w:p'):
                 text += '\n\n'
         
-        text = re.sub(r'\n(\n+)\$(\s*.+\s*)\$', r'\n\1$$ \2 $$', text)
+        text = re.sub(r'\n(\n+)\$(\s*.+\s*)\$\n', r'\n\1$$ \2 $$', text)
         return text

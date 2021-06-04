@@ -1,5 +1,5 @@
 """
-
+Postprocessing functions for cleaning up latex equations in linear format which don't give valid LaTeX.
 """
 import re
 
@@ -10,6 +10,14 @@ clean_exps = {
     r'(\\qdrt)(\w+)': r'\\sqrt[4]{\2}',
     r'\\sfrac': r'\\frac',
     r'(\\o[i]+nt)(\w+)': r'\1{\2}',
+    r'\\bullet(\w+)': r'\\bullet \1',
+    r'\\sum([a-zA-Z0-9]+)': r'\\sum{\1}',
+    r'\\prod([a-zA-Z0-9]+)': r'\\prod{\1}',
+    r'\\amalg([a-zA-Z0-9]+)': r'\\amalg{\1}',
+    r'\\bigcup([a-zA-Z0-9]+)': r'\\bigcup{\1}',
+    r'\\bigcap([a-zA-Z0-9]+)': r'\\bigcap{\1}',
+    r'\\bigvee([a-zA-Z0-9]+)': r'\\bigvee{\1}',
+    r'\\bigwedge([a-zA-Z0-9]+)': r'\\bigwedge{\1}',
 }
 
 
