@@ -37,7 +37,9 @@ doc.block_delimiter = "%%" # "$$" by default
 
 # Limitation
 docxlatex currently requires all the mathematical equations in the .docx document to be converted into linear format to extract successfully. I am adding support for 
-equations in the professional format right now. Soon you will be able to use it without having to use this workaround, but for now, open the .docx file in Word, click on any equation, click on the right context menu > All - linear.
+equations in the professional format right now. Future releases will let you use it without having to use this workaround, but for now, make sure all the equations in the .docx file are converted into linear form.  
+
+To convert all your equations into linear format, click on any equation, go to the Equation tab, make sure LaTeX is selected, and click on Convert > All - Linear
 
 # TODOs
 - [ ] Extract all images present in the file and return them as file-like objects
