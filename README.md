@@ -7,6 +7,9 @@ primarily for use with MathJax.
 
 docxlatex DOES NOT convert the entire .docx file to a LaTeX source file.
 
+docxlatex is still in beta and does not work perfectly on all equations. However, 
+it does work with reasonable accuracy on standard symbols and equations.
+
 # Installation
 Install using pip  
 `pip install docxlatex`
@@ -39,9 +42,10 @@ doc.block_delimiter = "%%" # "$$" by default
 docxlatex currently requires all the mathematical equations in the .docx document to be converted into linear format to extract successfully. I am adding support for 
 equations in the professional format right now. Future releases will let you use it without having to use this workaround, but for now, make sure all the equations in the .docx file are converted into linear form.  
 
-To convert all your equations into linear format, click on any equation, go to the Equation tab, make sure LaTeX is selected, and click on Convert > All - Linear
+To convert all your equations into linear format, click on any equation, go to the Equation tab, make sure LaTeX is selected, and click on Convert &#8594; All - Linear
+
+Please report any bugs on this project's GitHub page [hrushikeshrv/docxlatex](https://github.com/hrushikeshrv/docxlatex/issues)
 
 # TODOs
 - [ ] Extract all images present in the file and return them as file-like objects
 - [ ] Add support for equations in professional formatting
-- [ ] Clean up equations in linear format that do not directly convert to valid LaTeX

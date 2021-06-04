@@ -1,0 +1,18 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+root {
+    --background-light-1: rgb(255, 255, 255);
+    --background: rgb(245, 245, 245);
+    --background-dark-1: rgb(226, 226, 226);
+    --background-dark-2: rgb(202, 200, 200);
+    --background-dark-3: rgb(184, 184, 184);
+
+    --primary-color: rgb(140, 243, 113);
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+}
