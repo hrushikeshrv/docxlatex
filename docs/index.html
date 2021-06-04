@@ -1,13 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale='1'">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="UTF-8">
     <meta name="author" content="Hrushikesh Vaidya | @hrushikeshrv on GitHub">
     <meta name="description" content="docxlatex is a python package to extract text and mathematical equations from .docx files. It returns the equations wrapped in delimiters and converted to valid LaTeX syntax">
     <title>DocxLatex - Extract text and equations from .docx files</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@200;300;400;500;600;700&family=Lato:wght@300;400;700&family=Staatliches&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+<div class="flexbox-row">
+    <div class="flexbox-column pad-10 aic" id="sidebar">
 
+    </div>
+    <div class="flexbox-column pad-30" id="content">
+        <h1>docxlatex</h1>
+        <div class="mbt-20">
+            docxlatex is a light-weight python package for extracting text and mathematical equations from .docx files.
+        </div>
+        <div class="mbt-20">
+            Influenced by <a href="https://github.com/python-openxml/python-docx" target="_blank">python-docx</a> and
+            <a href="https://github.com/ankushshah89/python-docx2txt" target="_blank">python-docx2txt</a>, this project aims to
+            expand the functionality of the previous two libraries by adding support for extracting equations from .docx documents.
+        </div>
+        <div class="mbt-20 warning" data-before="Note">
+            docxlatex <strong>does not</strong> convert the entire .docx file into a TeX/LaTeX source file. It extracts the equations
+            present in the document and converts them into valid LaTeX syntax and wraps them in delimiters.
+        </div>
+
+        <h1 id="installation">Installation</h1>
+        <div class="mbt-20 flexbox-column aifs">
+            Install using pip <code class="mt-10">pip install docxlatex</code>
+        </div>
+
+        <h1 id="usage">Usage</h1>
+        <div class="mb-20 flexbox-column aifs">
+            <p>
+                Usage is straightforward. For standard usage you will probably only need one method on the <code>Document</code>
+                class.
+            </p>
+            <p>
+                Import the <code>Document</code> class from <code>docxlatex</code>
+            </p>
+
+            <div class="codeblock">
+                from docxlatex import Document
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
