@@ -20,7 +20,7 @@ class Document:
         :param get_header_text:bool - True if you want to extract text from the header, False otherwise
         :param get_footer_text:bool - True if you want to extract text from the footer, False otherwise
         :param image_dir:str - The path to the directory where you want to store images
-        :param extensions:List[str], tuple - A list of tuple of string of the extensions you want to extract (['.jpg', '.png'])
+        :param extensions:List[str], tuple - A list of tuple of string of the extensions you want to extract (['.jpg', '.png', ...])
         :return text:str - The extracted text
         """
         if extensions is None:
