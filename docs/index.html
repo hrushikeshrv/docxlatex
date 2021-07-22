@@ -29,6 +29,10 @@
             docxlatex <strong>does not</strong> convert the entire .docx file into a TeX/LaTeX source file. It extracts the equations
             present in the document and converts them into valid LaTeX syntax and wraps them in delimiters.
         </div>
+        <div class="mbt-20 warning" data-before="Limitation">
+            In order to extract equations inserted into the document, you will need to convert them into linear format first. <br><br>
+            To convert all your equations into linear format, click on any equation, go to the Equation tab, make sure LaTeX is selected, and click on Convert → All - Linear.
+        </div>
 
         <h1 id="installation">Installation</h1>
         <div class="mbt-20 flexbox-column aifs">
@@ -44,9 +48,64 @@
             <p>
                 Import the <code>Document</code> class from <code>docxlatex</code>
             </p>
-
             <div class="codeblock">
                 from docxlatex import Document
+            </div>
+            <p>
+                Instantiate an object of the <code>Document</code> class, giving it either the path to the .docx file or
+                a file-like object.
+            </p>
+            <div class="codeblock">
+                docx = Document('/path/to/document')<br><br># OR<br><br>
+                _ = open('/path/to/document')<br>
+                docx = Document(_)
+            </div>
+            <p>
+                Call the <a href="#Document.get_text()">get_text()</a> method on the Document object to extract all text from the document.
+            </p>
+            <div class="codeblock">
+                text = docx.get_text()
+            </div>
+            <div class="mbt-20 warning" data-before="Limitation">
+                In order to extract equations inserted into the document, you will need to convert them into linear format first.<br><br>
+                To convert all your equations into linear format, click on any equation, go to the Equation tab, make sure LaTeX is selected, and click on Convert → All - Linear.
+            </div>
+        </div>
+
+        <h1 id="api-reference">API Reference</h1>
+        <div class="mb-20 flexbox-column aifs">
+            <h2 class="mono-heading" id="Document">class Document</h2>
+            <div class="container border-left">
+                <p>
+                    A class representing a .docx document. A thin wrapper with methods to extract text from the document.
+                </p>
+                <h3 class="mono-heading mb-10 mt-50">Document.document</h3>
+                <p>
+                    The .docx document from which text is to be extracted. Stored as a file-like object OR a path to a file-like object.
+                </p>
+                <h3 class="mono-heading mb-10 mt-50">Document.inline_delimiter</h3>
+                <p>
+                    The delimiter to wrap inline equations in. Defaults to <code>'$'</code>. All equations found in a continuous line of text will be
+                    wrapped between this delimiter.
+                </p>
+                <div class="codeblock">
+                    The slope of a straight line is given by $ \frac{y_2 - y_1}{x_2 - x_1} $.
+                </div>
+                <h3 class="mono-heading mb-10 mt-50">Document.block_delimiter</h3>
+                <p>
+                    The delimiter to wrap equation blocks in. Defaults to <code>'$$'</code>. All equations found on their own line and
+                    preceded and succeeded by newlines will be wrapped between this delimiter.
+                </p>
+                <div class="codeblock">
+                    Markov's theorem states that the probability that a random variable R is greater than or equal to
+                    some value x is at most the expected value of the random variable divided by x - <br><br>
+                    $$ Pr\left(R \geq x\right) \leq \frac{Ex\left(R\right)}{x} $$
+                </div>
+                <h3 class="mono-heading mb-10 mt-50" id="Document.get_text()">Document.get_text(self, get_header_text=False, get_footer_text=False,
+                     image_dir=None, extensions=None)</h3>
+                <p>
+
+                </p>
             </div>
         </div>
     </div>

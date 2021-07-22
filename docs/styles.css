@@ -257,7 +257,13 @@ code {
     padding: 1px 8px;
     border-radius: 4px;
     font-family: var(--monospace-font);
-    margin-top: 3px;
+    margin: 3px 5px;
+}
+
+a {
+    color: var(--warning-dark-3);
+    border-bottom: 2px solid black;
+    text-decoration: none;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -296,9 +302,18 @@ h1 {
     margin: 10px 0;
     padding: 10px;
     background-color: var(--background-dark-1);
-    width: 100%;
+    /*width: 100%;*/
     border-radius: 6px;
     font-family: var(--monospace-font);
+}
+
+.mono-heading {
+    font-family: var(--monospace-font);
+}
+
+.border-left {
+    border-left: 2px solid var(--warning-yellow);
+    padding-left: 20px;
 }
 
 
@@ -309,6 +324,12 @@ h1 {
 #sidebar {
     width: 300px;
     background-color: var(--background-dark-2);
+}
+
+@media (max-width: 800px) {
+    #sidebar {
+        display: none;
+    }
 }
 
 #content {
