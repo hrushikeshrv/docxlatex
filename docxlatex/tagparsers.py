@@ -66,7 +66,7 @@ def sigma(tag):
 
 def frac(tag):
     """
-    Constructs LaTeX of the form \frac{}{}
+    Constructs LaTeX of the form \\frac{}{}
     :param tag:
     :return latex:str - A latex fraction
     """

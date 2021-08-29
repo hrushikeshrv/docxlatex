@@ -1,5 +1,6 @@
 import zipfile
 from defusedxml import ElementTree
+from xml.dom import minidom
 import re
 import os
 
@@ -44,6 +45,16 @@ class Document:
                         destination_file.write(zip_f.read(f))
         zip_f.close()
         return text
+    
+    def pprint_xml(self):
+        zip_f = zipfile.ZipFile(self.document)
+        for f in zip_f.namelist():
+            if f.startswith('word/document'):
+                # xml = zip_f.read(f)
+                dom = minidom.parse(zip_f.open(f))
+                print(dom.toprettyxml())
+                break
+        zip_f.close()
 
     def xml_to_text(self, xml):
         """
@@ -61,12 +72,16 @@ class Document:
         
             if child.tag == qn('w:t'):
                 text += child.text if child.text is not None else ''
+            
+            # Found an equation
             elif child.tag == qn('m:oMath'):
                 text += self.inline_delimiter + ' '
                 text += tag_to_latex(child)
                 text += ' ' + self.inline_delimiter
             elif child.tag == qn('m:r'):
                 text += ''.join(child.itertext())
+
+            # Found an image
             elif child.tag == qn('w:drawing'):
                 n_images += 1
                 text += f'\nIMAGE#{n_images}-image{n_images}\n'
@@ -80,3 +95,9 @@ class Document:
         
         text = re.sub(r'\n(\n+)\$(\s*.+\s*)\$\n', r'\n\1$$ \2 $$', text)
         return text
+
+
+if __name__ == '__main__':
+    f_path = input('Enter the name of the docx file in ../tests - ')
+    doc = Document(os.path.join(os.path.split(os.path.dirname(__file__))[0], 'tests', f_path))
+    doc.pprint_xml()

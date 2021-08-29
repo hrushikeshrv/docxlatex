@@ -81,7 +81,8 @@
                 </p>
                 <h3 class="mono-heading mb-10 mt-50">Document.document</h3>
                 <p>
-                    The .docx document from which text is to be extracted. Stored as a file-like object OR a path to a file-like object.
+                    The .docx document from which text is to be extracted. Stored as a file-like object OR a path to a file-like object and is only read when the
+                    <code>Document.get_text()</code> method is called.
                 </p>
                 <h3 class="mono-heading mb-10 mt-50">Document.inline_delimiter</h3>
                 <p>
@@ -94,7 +95,7 @@
                 <h3 class="mono-heading mb-10 mt-50">Document.block_delimiter</h3>
                 <p>
                     The delimiter to wrap equation blocks in. Defaults to <code>'$$'</code>. All equations found on their own line and
-                    preceded and succeeded by newlines will be wrapped between this delimiter.
+                    preceded and/or succeeded by newlines will be wrapped between this delimiter.
                 </p>
                 <div class="codeblock">
                     Markov's theorem states that the probability that a random variable R is greater than or equal to
