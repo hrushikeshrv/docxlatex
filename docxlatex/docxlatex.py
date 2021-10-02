@@ -98,6 +98,6 @@ class Document:
 
 
 if __name__ == '__main__':
-    f_path = input('Enter the name of the docx file in ../tests - ')
-    doc = Document(os.path.join(os.path.split(os.path.dirname(__file__))[0], 'tests', f_path))
+    f_path = input('Enter the name of the docx file in ../docx - ')
+    doc = Document(os.path.join(os.path.split(os.path.dirname(__file__))[0], 'docx', f_path))
     doc.pprint_xml()
