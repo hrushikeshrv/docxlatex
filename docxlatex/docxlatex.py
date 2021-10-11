@@ -4,7 +4,7 @@ from xml.dom import minidom
 import re
 import os
 
-from .tagparsers import tag_to_latex, qn
+from tagparsers import tag_to_latex, qn
 
 
 class Document:
@@ -112,3 +112,4 @@ if __name__ == '__main__':
     f_path = input('Enter the name of the docx file in ../docx - ')
     doc = Document(os.path.join(os.path.split(os.path.dirname(__file__))[0], 'docx', f_path))
     doc.pprint_xml()
+    # print(doc.get_text(True))
