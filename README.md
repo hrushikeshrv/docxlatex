@@ -38,12 +38,9 @@ doc.block_delimiter = "%%" # "$$" by default
 ```
 
 # Limitation
-docxlatex currently requires all the mathematical equations in the .docx document to be converted into linear format to extract successfully. I am adding support for 
-equations in the professional format right now. Future releases will let you use it without having to use this workaround, but for now, make sure all the equations in the .docx file are converted into linear form.  
+docxlatex currently requires all the mathematical equations in the .docx document to be converted into linear format to extract successfully. Make sure all the equations in the .docx file are converted into linear form.  
 
 To convert all your equations into linear format, click on any equation, go to the Equation tab, make sure LaTeX is selected, and click on Convert &#8594; All - Linear
 
 Please report any bugs on this project's GitHub page [docxlatex/issues](https://github.com/hrushikeshrv/docxlatex/issues)
 
-# TODOs
-- [ ] Add support for equations in professional formatting
