@@ -1,5 +1,6 @@
 venv/
 .idea/
+.vscode/
 
 __pycache__/
 *.pyc
@@ -8,3 +9,5 @@ build/
 develop-eggs/
 dist/
 docxlatex.egg-info/
+docx/
+_test/
