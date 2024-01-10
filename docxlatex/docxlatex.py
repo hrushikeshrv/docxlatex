@@ -13,12 +13,12 @@ class Document:
         self.inline_delimiter = inline_delimiter
         self.block_delimiter = block_delimiter
     
-    def get_text(self, inline_equations=False, get_header_text=False, get_footer_text=False, image_dir=None, extensions=None):
+    def get_text(self, linear_equations=False, get_header_text=False, get_footer_text=False, image_dir=None, extensions=None):
         """
         Extract the text from the .docx file while converting the equations in the document
         to valid LaTeX syntax, enclosed within the specified delimiters
         
-        :param inline_equations:bool - True if the inserted equations in the document have been converted
+        :param linear_equations:bool - True if the inserted equations in the document have been converted
             into linear format in LaTeX syntax, False if the equations are in professional formatting.
             We assume the equations are not in unicode or any other format.
         :param get_header_text:bool - True if you want to extract text from the header, False otherwise
@@ -34,11 +34,11 @@ class Document:
         text = ''
         for f in zip_f.namelist():
             if get_header_text and f.startswith('word/header'):
-                text += self.xml_to_text(zip_f.read(f), inline_equations)
+                text += self.xml_to_text(zip_f.read(f), linear_equations)
             if f.startswith('word/document'):
-                text += self.xml_to_text(zip_f.read(f), inline_equations)
+                text += self.xml_to_text(zip_f.read(f), linear_equations)
             if get_footer_text and f.startswith('word/footer'):
-                text += self.xml_to_text(zip_f.read(f), inline_equations)
+                text += self.xml_to_text(zip_f.read(f), linear_equations)
         
         if image_dir is not None:
             for f in zip_f.namelist():
@@ -60,17 +60,17 @@ class Document:
                 break
         zip_f.close()
 
-    def xml_to_text(self, xml, inline_equations):
+    def xml_to_text(self, xml, linear_equations):
         """
             Recursively iterate over the ElementTree of the word document and extract text content from supported tags.
 
             :param xml:str - XML string to be parsed into an xml.etree.Element object.
-            :param inline_equations:bool - True if the equations in the document have been converted into
+            :param linear_equations:bool - True if the equations in the document have been converted into
                 linear format in LaTeX syntax. False if the equations are in professional formatting.
                 We assume the equations are not in unicode or any other format.
             :return text:str - The text contained in the tag
         """
-        if inline_equations:
+        if linear_equations:
             text = ''
             n_images = 0
             root = ElementTree.fromstring(xml)
@@ -104,7 +104,7 @@ class Document:
             text = re.sub(r'\n(\n+)\$(\s*.+\s*)\$\n', r'\n\1$$ \2 $$', text)
             return text
         else:
-            # TODO - If not inline equations, extract them from the xml yourself.
+            # TODO - If the equations are not in linear form, extract them from the xml yourself.
             return ''
 
 
