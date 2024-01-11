@@ -2,7 +2,7 @@
     Utility functions to extract text from the supported mathematical equations from xml tags and
     convert them into LaTeX
 """
-from cleaners import clean_exp
+from docxlatex.cleaners import clean_exp
 
 ns_map = {
     "w": "http://schemas.openxmlformats.org/wordprocessingml/2006/main",

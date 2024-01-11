@@ -4,7 +4,7 @@ from xml.dom import minidom
 import re
 import os
 
-from tagparsers import tag_to_latex, qn
+from docxlatex.tagparsers import tag_to_latex, qn
 
 
 class Document:
@@ -15,7 +15,7 @@ class Document:
 
     def get_text(
         self,
-        linear_equations: bool = False,
+        linear_format: bool = True,
         get_header_text: bool = False,
         get_footer_text: bool = False,
         image_dir: str | None = None,
@@ -25,9 +25,9 @@ class Document:
         Extract the text from the .docx file while converting the equations in the document
         to valid LaTeX syntax, enclosed within the specified delimiters
 
-        :param linear_equations:bool - True if the inserted equations in the document have been converted
+        :param linear_format:bool - True if the inserted equations in the document have been converted
             into linear format in LaTeX syntax, False if the equations are in professional formatting.
-            We assume the equations are not in unicode or any other format.
+            We assume the equations are not in unicode or any other format. Defaults to True.
         :param get_header_text:bool - True if you want to extract text from the header, False otherwise
         :param get_footer_text:bool - True if you want to extract text from the footer, False otherwise
         :param image_dir:str - The path to the directory where you want to store images
@@ -41,11 +41,11 @@ class Document:
         text = ""
         for f in zip_f.namelist():
             if get_header_text and f.startswith("word/header"):
-                text += self.xml_to_text(zip_f.read(f), linear_equations)
+                text += self.xml_to_text(zip_f.read(f), linear_format)
             if f.startswith("word/document"):
-                text += self.xml_to_text(zip_f.read(f), linear_equations)
+                text += self.xml_to_text(zip_f.read(f), linear_format)
             if get_footer_text and f.startswith("word/footer"):
-                text += self.xml_to_text(zip_f.read(f), linear_equations)
+                text += self.xml_to_text(zip_f.read(f), linear_format)
 
         if image_dir is not None:
             for f in zip_f.namelist():
