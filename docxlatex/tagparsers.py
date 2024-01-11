@@ -5,8 +5,8 @@
 from cleaners import clean_exp
 
 ns_map = {
-    'w': 'http://schemas.openxmlformats.org/wordprocessingml/2006/main',
-    'm': 'http://schemas.openxmlformats.org/officeDocument/2006/math',
+    "w": "http://schemas.openxmlformats.org/wordprocessingml/2006/main",
+    "m": "http://schemas.openxmlformats.org/officeDocument/2006/math",
 }
 
 
@@ -35,10 +35,10 @@ def linear_expression(tag):
     :param tag:defusedxml.Element - An xml element which contains a math equation in linear form
     :return text:str - The equation in valid LaTeX syntax
     """
-    text = ''
+    text = ""
     for child in tag.iter():
-        child.set('docxlatex_skip_iteration', True)
-        text += child.text if child.text is not None else ''
+        child.set("docxlatex_skip_iteration", True)
+        text += child.text if child.text is not None else ""
     text = clean_exp(text)
     return text
 
@@ -52,6 +52,6 @@ def qn(tag):
     :param tag:str - A namespace-prefixed tag name
     :return qn:str - A Clark-notation qualified name tag for lxml.
     """
-    prefix, tag_root = tag.split(':')
+    prefix, tag_root = tag.split(":")
     uri = ns_map[prefix]
-    return '{{{}}}{}'.format(uri, tag_root)
+    return "{{{}}}{}".format(uri, tag_root)
