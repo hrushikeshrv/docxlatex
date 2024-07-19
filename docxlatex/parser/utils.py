@@ -10,27 +10,9 @@ ns_map = {
 }
 
 
-def tag_to_latex(tag):
-    # exp = ''
-    # for child in tag.iter():
-    #     if child.tag == qn('m:chr'):
-    #         exp = child.get('{http://schemas.openxmlformats.org/officeDocument/2006/math}val')
-    #     elif child.tag == qn('m:f'):
-    #         exp = 'frac'
-    #         break
-    # if exp == '':
-    #     return linear_expression(tag)
-    # text = ''
-    # try:
-    #     text += supported_exps[exp](tag)
-    # except KeyError:
-    #     text += linear_expression(tag)
-    return linear_expression(tag)
-
-
 def linear_expression(tag):
     """
-    Just returns the text contained in the given tag while setting defusedxml_skip_iteration flags
+    Just returns the text contained in the given tag while setting docxlatex_skip_iteration flags
     for all its children.
     :param tag:defusedxml.Element - An xml element which contains a math equation in linear form
     :return text:str - The equation in valid LaTeX syntax

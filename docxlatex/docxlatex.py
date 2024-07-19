@@ -4,7 +4,7 @@ from xml.dom import minidom
 import re
 import os
 
-from docxlatex.tagparsers import tag_to_latex, qn
+from docxlatex.parser.utils import linear_expression, qn
 
 
 class Document:
@@ -91,7 +91,7 @@ class Document:
                 # Found an equation
                 elif child.tag == qn("m:oMath"):
                     text += self.inline_delimiter + " "
-                    text += tag_to_latex(child)
+                    text += linear_expression(child)
                     text += " " + self.inline_delimiter
                 elif child.tag == qn("m:r"):
                     text += "".join(child.itertext())
