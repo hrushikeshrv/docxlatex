@@ -5,6 +5,7 @@ import re
 import os
 
 from docxlatex.parser.utils import linear_expression, qn
+from docxlatex.parser import OMMLParser
 
 
 class Document:
@@ -67,7 +68,7 @@ class Document:
                 break
         zip_f.close()
 
-    def xml_to_text(self, xml: str, linear_format: bool) -> str:
+    def xml_to_text(self, xml: bytes, linear_format: bool) -> str:
         """
         Recursively iterate over the ElementTree of the document and extract text content from supported tags.
 
@@ -77,48 +78,39 @@ class Document:
         We assume the equations are not in unicode or any other format.
         :return text:str - The text contained in the tag
         """
-        if linear_format:
-            text = ""
-            n_images = 0
-            root = ElementTree.fromstring(xml)
-            for child in root.iter():
-                if child.get("docxlatex_skip_iteration", False):
-                    continue
+        text = ""
+        n_images = 0
+        root = ElementTree.fromstring(xml)
+        for child in root.iter():
+            if child.get("docxlatex_skip_iteration", False):
+                continue
 
-                if child.tag == qn("w:t"):
-                    text += child.text if child.text is not None else ""
+            # Found text
+            if child.tag == qn("w:t"):
+                text += child.text if child.text is not None else ""
 
-                # Found an equation
-                elif child.tag == qn("m:oMath"):
+            # Found an equation
+            elif child.tag == qn("m:oMath"):
+                if linear_format:
                     text += self.inline_delimiter + " "
                     text += linear_expression(child)
                     text += " " + self.inline_delimiter
-                elif child.tag == qn("m:r"):
-                    text += "".join(child.itertext())
+                else:
+                    text += '$ ' + OMMLParser().parse(child) + ' $'
+            elif child.tag == qn("m:r") and linear_format:
+                text += "".join(child.itertext())
 
-                # Found an image
-                elif child.tag == qn("w:drawing"):
-                    n_images += 1
-                    text += f"\nIMAGE#{n_images}-image{n_images}\n"
+            # Found an image
+            elif child.tag == qn("w:drawing"):
+                n_images += 1
+                text += f"\nIMAGE#{n_images}-image{n_images}\n"
 
-                elif child.tag == qn("w:tab"):
-                    text += "\t"
-                elif child.tag == qn("w:br") or child.tag == qn("w:cr"):
-                    text += "\n"
-                elif child.tag == qn("w:p"):
-                    text += "\n\n"
+            elif child.tag == qn("w:tab"):
+                text += "\t"
+            elif child.tag == qn("w:br") or child.tag == qn("w:cr"):
+                text += "\n"
+            elif child.tag == qn("w:p"):
+                text += "\n\n"
 
-            text = re.sub(r"\n(\n+)\$(\s*.+\s*)\$\n", r"\n\1$$ \2 $$", text)
-            return text
-        else:
-            # TODO - If the equations are not in linear format, extract them from the xml yourself.
-            return ""
-
-
-if __name__ == "__main__":
-    f_path = input("Enter the name of the docx file in ../docx - ")
-    doc = Document(
-        os.path.join(os.path.split(os.path.dirname(__file__))[0], "tests", "docx", f_path)
-    )
-    doc.pprint_xml()
-    # print(doc.get_text(True))
+        text = re.sub(r"\n(\n+)\$(\s*.+\s*)\$\n", r"\n\1$$ \2 $$", text)
+        return text
