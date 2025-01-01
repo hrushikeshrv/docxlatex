@@ -58,6 +58,21 @@ class Document:
         zip_f.close()
         return text
 
+    def get_xml(self):
+        """
+        :return: The XML representation of the document body (ignores the header and footer)
+        """
+        _xml = ''
+        zip_f = zipfile.ZipFile(self.document)
+        for f in zip_f.namelist():
+            if f.startswith("word/document"):
+                # xml = zip_f.read(f)
+                dom = minidom.parse(zip_f.open(f))
+                _xml = dom.toprettyxml()
+                break
+        zip_f.close()
+        return _xml
+
     def pprint_xml(self):
         zip_f = zipfile.ZipFile(self.document)
         for f in zip_f.namelist():
