@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "docxlatex"
+version = "0.1.6"
+description = "Extract text from .docx files with support for inserted equations"
+readme = "README.md"
+requires-python = ">=3.8"
+license = { text = "MIT" }
+authors = [
+    { name = "Hrushikesh Vaidya", email = "hrushikeshrv@gmail.com" }
+]
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8"
+]
+urls = { "Homepage" = "https://github.com/hrushikeshrv/docxlatex" }
+
+dependencies = ["defusedxml"]
+
+[tool.setuptools.packages.find]
+exclude = ["docx"]
+
+[project.optional-dependencies]
+dev = ["pytest", "black"]
+
+[project.scripts]
+docxlatex = "docxlatex.cli:main"
