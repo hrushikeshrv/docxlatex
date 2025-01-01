@@ -10,3 +10,6 @@ develop-eggs/
 dist/
 docxlatex.egg-info/
 _test/
+
+# All Microsoft temp files
+[~][$]*
