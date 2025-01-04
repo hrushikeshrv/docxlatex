@@ -78,4 +78,3 @@ These OMML tags will be ignored while parsing into LaTeX.
 | `zeroAsc`     | Phantom Zero Ascent                               |
 | `zeroDesc`    | Phantom Zero Descent                              |
 | `zeroWid`     | Phantom Zero Width                                |
-| `argSz`       | Argument                                          |

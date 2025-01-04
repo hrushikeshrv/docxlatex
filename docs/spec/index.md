@@ -3,4 +3,6 @@ This collection of files lists the OMML tags (i.e. the types of operators and fu
 
 Chapter 22 in the `Ecma Office Open XML Part 1 - Fundamentals And Markup Language Reference` document lists all OMML tags, which you can refer to determine whether the tag you are interested in is supported by docxlatex.
 
-Supported tags will be extracted and converted into LaTeX correctly, unsupported tags will be extracted but may not convert to LaTeX correctly, or their properties may not be applied correctly during extraction, and ignored tags will not be extracted and their properties will not be considered during extraction.
+- [Supported tags](./supported-tags.md) will be extracted and converted into LaTeX correctly 
+- [Unsupported tags](./unsupported-tags.md) will be extracted but may not convert to LaTeX correctly, or their properties may not be applied correctly during extraction
+- [Ignored tags](./ignored-tags.md) will not be extracted and their properties will not be considered during extraction.

@@ -31,23 +31,30 @@ class OMMLParser:
 
     def parse_acc(self, root: Element) -> str:
         character_map = {
-            '&#768;': '\\grave',
-            '&#769;': '\\acute',
-            '&#770;': '\\hat',
-            '&#771;': '\\tilde',
-            '&#773;': '\\bar',
-            '&#774;': '\\breve',
-            '&#775;': '\\dot',
-            '&#776;': '\\ddot',
-            '&#780;': '\\check'
+            768: '\\grave',
+            769: '\\acute',
+            770: '\\hat',
+            771: '\\tilde',
+            773: '\\bar',
+            774: '\\breve',
+            775: '\\dot',
+            776: '\\ddot',
+            780: '\\check',
+            8411: '\\dddot',
+            831: '\\overline{\\overline',
+            8406: '\\overleftarrow',
+            8407: '\\overrightarrow',
+            8417: '\\overset\\leftrightarrow',
+            8400: '\\overset\\leftharpoonup',
+            8401: '\\overset\\rightharpoonup',
         }
         text = ''
-        accent = '&#770;'
+        accent = 770
         for child in root:
             if child.tag == qn('m:accPr'):
                 for child2 in child:
                     if child2.tag == qn('m:chr'):
-                        accent = child2.attrib.get('m:val')
+                        accent = ord(child2.attrib.get(qn('m:val')))
 
         text += character_map[accent] + '{'
         for child in root:
@@ -56,6 +63,8 @@ class OMMLParser:
                     if child2.tag in self.parsers:
                         text += self.parsers[child2.tag](self, child2)
         text += '}'
+        if accent == 831:
+            text += '}'
         return text
 
     parsers = {

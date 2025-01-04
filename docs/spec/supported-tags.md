@@ -51,6 +51,3 @@ These OMML tags will be successfully parsed into LaTeX.
 | `sub`        | Subscript (Pre-Sub-Superscript)     |
 | `sup`        | Superscript (Superscript Object)    |
 | `t`          | Text                                |
-| `acc`        | Accent                              |
-| `acc`        | Accent                              |
-
