@@ -45,6 +45,8 @@ class TestTags(unittest.TestCase):
         self.assertEqual(text, '$ \\overset\\leftharpoonup{a} $')
         text = Document('../docx/tags/acc/rightharpoon.docx').get_text(linear_format=False).strip()
         self.assertEqual(text, '$ \\overset\\rightharpoonup{a} $')
+        text = Document('../docx/tags/acc/tilde-bar.docx').get_text(linear_format=False).strip()
+        self.assertEqual(text, '$ \\bar{\\tilde{a}} $')
 
 
 if __name__ == '__main__':

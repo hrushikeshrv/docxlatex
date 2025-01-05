@@ -22,6 +22,12 @@ def main():
         action='store_true',
         help='Dump the document\'s XML instead of converting to text',
     )
+    parser.add_argument(
+        '-l',
+        action='store_true',
+        default=False,
+        help='Specifies that the document has been converted to "Linear" format'
+    )
     args = parser.parse_args()
 
     try:
@@ -34,10 +40,10 @@ def main():
                     f.write(doc.get_xml())
         else:
             if args.op is None:
-                print(doc.get_text())
+                print(doc.get_text(linear_format=args.l))
             else:
                 with open(args.op, 'w') as f:
-                    f.write(doc.get_text())
+                    f.write(doc.get_text(linear_format=args.l))
     except Exception as e:
         print(e)
         sys.exit(1)
