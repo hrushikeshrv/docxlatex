@@ -40,13 +40,13 @@ class OMMLParser:
             775: '\\dot',
             776: '\\ddot',
             780: '\\check',
-            8411: '\\dddot',
             831: '\\overline{\\overline',
-            8406: '\\overleftarrow',
-            8407: '\\overrightarrow',
-            8417: '\\overset\\leftrightarrow',
             8400: '\\overset\\leftharpoonup',
             8401: '\\overset\\rightharpoonup',
+            8406: '\\overleftarrow',
+            8407: '\\overrightarrow',
+            8411: '\\dddot',
+            8417: '\\overset\\leftrightarrow',
         }
         text = ''
         accent = 770
@@ -67,7 +67,18 @@ class OMMLParser:
             text += '}'
         return text
 
+    def parse_border_box(self, root: Element) -> str:
+        text = '\\boxed{'
+        for child in root:
+            if child.tag == qn('m:e'):
+                for child2 in child:
+                    if child2.tag in self.parsers:
+                        text += self.parsers[child2.tag](self, child2)
+        text += '}'
+        return text
+
     parsers = {
         qn('m:r'): parse_r,
         qn('m:acc'): parse_acc,
+        qn('m:borderBox'): parse_border_box,
     }
