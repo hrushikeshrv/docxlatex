@@ -22,7 +22,7 @@ These OMML tags will be successfully parsed into LaTeX.
 | `f`          | Fraction Object                     |                                            |
 | `fName`      | Function Name                       |                                            |
 | `func`       | Function Apply Object               |                                            |
-| `groupChr`   | Group-Character Object              |                                            |
+| `groupChr`   | Group-Character Object              | Equation > Accent > Accents                |
 | `groupChrPr` | Group-Character Properties          |                                            |
 | `grow`       | n-ary Grow                          |                                            |
 | `lim`        | Limit                               |                                            |

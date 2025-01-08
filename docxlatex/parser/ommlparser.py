@@ -59,21 +59,32 @@ class OMMLParser:
         text += character_map[accent] + '{'
         for child in root:
             if child.tag == qn('m:e'):
-                for child2 in child:
-                    if child2.tag in self.parsers:
-                        text += self.parsers[child2.tag](self, child2)
+                text += self.parse(child)
         text += '}'
         if accent == 831:
             text += '}'
+        return text
+
+    def parse_bar(self, root: Element) -> str:
+        text = '\\overline{'
+        for child in root:
+            if child.tag == qn('m:barPr'):
+                for child2 in child:
+                    if child2.tag == qn('m:pos'):
+                        if child2.attrib.get(qn('m:val')) == 'bot':
+                            text = '\\underline{'
+
+        for child in root:
+            if child.tag == qn('m:e'):
+                text += self.parse(child)
+        text += '}'
         return text
 
     def parse_border_box(self, root: Element) -> str:
         text = '\\boxed{'
         for child in root:
             if child.tag == qn('m:e'):
-                for child2 in child:
-                    if child2.tag in self.parsers:
-                        text += self.parsers[child2.tag](self, child2)
+                text += self.parse(child)
         text += '}'
         return text
 
@@ -81,4 +92,5 @@ class OMMLParser:
         qn('m:r'): parse_r,
         qn('m:acc'): parse_acc,
         qn('m:borderBox'): parse_border_box,
+        qn('m:bar'): parse_bar,
     }
