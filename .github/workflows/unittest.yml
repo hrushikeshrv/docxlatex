@@ -12,6 +12,8 @@ jobs:
         uses: actions/setup-python@v4
       - name: Install Dependencies
         run: pip install -r requirements.txt
+      - name: Install docxlatex
+        run: pip install -e .
       - name: Run Tests
         run: python -m unittest
         working-directory: ./tests
