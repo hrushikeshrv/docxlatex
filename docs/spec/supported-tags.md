@@ -19,7 +19,7 @@ These OMML tags will be successfully parsed into LaTeX.
 | `e`          | Element                             |                                            |
 | `endChr`     | Delimiter Ending Character          |                                            |
 | `eqArr`      | Equation Array                      |                                            |
-| `f`          | Fraction Object                     |                                            |
+| `f`          | Fraction Object                     | Equation > Fraction                        |
 | `fName`      | Function Name                       |                                            |
 | `func`       | Function Apply Object               |                                            |
 | `groupChr`   | Group-Character Object              | Equation > Accent > Accents                |

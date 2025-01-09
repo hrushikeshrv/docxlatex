@@ -13,6 +13,7 @@ class Document:
         self.document = document
         self.inline_delimiter = inline_delimiter
         self.block_delimiter = block_delimiter
+        self.equations = []
 
     def get_text(
         self,
@@ -62,11 +63,10 @@ class Document:
         """
         :return: The XML representation of the document body (ignores the header and footer)
         """
-        _xml = ''
+        _xml = ""
         zip_f = zipfile.ZipFile(self.document)
         for f in zip_f.namelist():
             if f.startswith("word/document"):
-                # xml = zip_f.read(f)
                 dom = minidom.parse(zip_f.open(f))
                 _xml = dom.toprettyxml()
                 break
@@ -77,7 +77,6 @@ class Document:
         zip_f = zipfile.ZipFile(self.document)
         for f in zip_f.namelist():
             if f.startswith("word/document"):
-                # xml = zip_f.read(f)
                 dom = minidom.parse(zip_f.open(f))
                 print(dom.toprettyxml())
                 break
@@ -107,11 +106,19 @@ class Document:
             # Found an equation
             elif child.tag == qn("m:oMath"):
                 if linear_format:
+                    eqn = linear_expression(child)
                     text += self.inline_delimiter + " "
-                    text += linear_expression(child)
+                    text += eqn
                     text += " " + self.inline_delimiter
+                    self.equations.append(eqn)
                 else:
-                    text += '$ ' + OMMLParser().parse(child) + ' $'
+                    eqn = OMMLParser().parse(child)
+                    text += (
+                        f"{self.inline_delimiter} "
+                        + eqn
+                        + f" {self.inline_delimiter}"
+                    )
+                    self.equations.append(eqn)
             elif child.tag == qn("m:r") and linear_format:
                 text += "".join(child.itertext())
 
@@ -127,5 +134,9 @@ class Document:
             elif child.tag == qn("w:p"):
                 text += "\n\n"
 
-        text = re.sub(r"\n(\n+)\$(\s*.+\s*)\$\n", r"\n\1$$ \2 $$", text)
+        text = re.sub(
+            rf"\n(\n+){self.inline_delimiter}(\s*.+\s*){self.inline_delimiter}\n",
+            rf"\n\1{self.block_delimiter} \2 {self.block_delimiter}",
+            text,
+        )
         return text
