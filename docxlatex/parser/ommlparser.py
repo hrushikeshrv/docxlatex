@@ -88,9 +88,36 @@ class OMMLParser:
         text += '}'
         return text
 
+    def parse_group_chr(self, root: Element) -> str:
+        text = '\\underbrace{'
+        for child in root:
+            if child.tag == qn('m:groupChrPr'):
+                for child2 in child:
+                    if child2.tag == qn('m:pos') and child2.attrib.get(qn('m:val')) == 'top':
+                        text = '\\overbrace{'
+        for child in root:
+            if child.tag == qn('m:e'):
+                text += self.parse(child)
+        text += '}'
+        return text
+
+    def parse_f(self, root: Element) -> str:
+        text = '\\frac{'
+        for child in root:
+            if child.tag == qn('m:num'):
+                text += self.parse(child)
+        text += '}{'
+        for child in root:
+            if child.tag == qn('m:den'):
+                text += self.parse(child)
+        text += '}'
+        return text
+
     parsers = {
         qn('m:r'): parse_r,
         qn('m:acc'): parse_acc,
         qn('m:borderBox'): parse_border_box,
         qn('m:bar'): parse_bar,
+        qn('m:groupChr'): parse_group_chr,
+        qn('m:f'): parse_f,
     }

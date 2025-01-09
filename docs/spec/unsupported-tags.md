@@ -3,6 +3,5 @@ These OMML tags will be extracted but may not convert to LaTeX correctly in all 
 
 | Element  | Name               |
 |----------|--------------------|
-| `limUpp` | Limit Upper Object |
 | `lit`    | Literal            |
 | `phant`  | Phantom Object     |

@@ -28,6 +28,7 @@ These OMML tags will be successfully parsed into LaTeX.
 | `lim`        | Limit                               |                                            |
 | `limLoc`     | n-ary Limit Location                |                                            |
 | `limLow`     | Lower-Limit Object                  |                                            |
+| `limUpp`     | Limit Upper Object                  |                                            |
 | `m`          | Matrix Object                       |                                            |
 | `mc`         | Matrix Column                       |                                            |
 | `mcPr`       | Matrix Column Properties            |                                            |

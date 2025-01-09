@@ -58,13 +58,23 @@ class TestTags(unittest.TestCase):
         text = Document('./docx/tags/bar/overline.docx').get_text(linear_format=False).strip()
         self.assertEqual('$ \\overline{asdf} $', text)
         # Section 22.1.2.8 of the spec says that the pos child of the barPr element
-        # must have value either top or bot, but the document does not have a pos child.
+        # must have value either top or bot, but the test document does not have a pos child.
         # Therefore, the default value is top and docxlatex will return an overline instead of
         # an underline.
         text = Document('./docx/tags/bar/underline.docx').get_text(linear_format=False).strip()
         self.assertEqual('$ \\overline{asdf} $', text)
         text = Document('./docx/tags/bar/overline-tilde.docx').get_text(linear_format=False).strip()
         self.assertEqual('$ \\overline{\\tilde{a}sdf} $', text)
+
+    def test_group_chr(self):
+        text = Document('./docx/tags/groupChr/overbrace.docx').get_text(linear_format=False).strip()
+        self.assertEqual('$ \\overbrace{asdf} $', text)
+        text = Document('./docx/tags/groupChr/underbrace.docx').get_text(linear_format=False).strip()
+        self.assertEqual('$ \\underbrace{asdf} $', text)
+
+    def test_f(self):
+        text = Document('./docx/tags/f/f.docx').get_text(linear_format=False).strip()
+        self.assertEqual('$ \\frac{abc}{def} $', text)
 
 
 if __name__ == '__main__':
