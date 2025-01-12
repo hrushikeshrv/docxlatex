@@ -152,6 +152,56 @@ class TestTags(unittest.TestCase):
         text = Document("./docx/tags/f/dydx.docx").get_text(linear_format=False).strip()
         self.assertEqual("$ \\frac{dy}{dx} $", text)
 
+    def test_s_sup(self):
+        text = (
+            Document("./docx/tags/sSup/exponent.docx")
+            .get_text(linear_format=False)
+            .strip()
+        )
+        self.assertEqual("$ {a}^{b} $", text)
+        text = (
+            Document("./docx/tags/sSup/abcdef.docx")
+            .get_text(linear_format=False)
+            .strip()
+        )
+        self.assertEqual("$ {abc}^{def} $", text)
+
+    def test_s_sub(self):
+        text = (
+            Document("./docx/tags/sSub/subscript.docx")
+            .get_text(linear_format=False)
+            .strip()
+        )
+        self.assertEqual("$ {a}_{b} $", text)
+        text = (
+            Document("./docx/tags/sSub/abcdef.docx")
+            .get_text(linear_format=False)
+            .strip()
+        )
+        self.assertEqual("$ {abc}_{def} $", text)
+
+    def test_s_sub_sup(self):
+        text = (
+            Document("./docx/tags/sSubSup/sub_sup.docx")
+            .get_text(linear_format=False)
+            .strip()
+        )
+        self.assertEqual("$ {a}_{b}^{c} $", text)
+        text = (
+            Document("./docx/tags/sSubSup/abcdefghi.docx")
+            .get_text(linear_format=False)
+            .strip()
+        )
+        self.assertEqual("$ {abc}_{def}^{ghi} $", text)
+
+    def test_s_pre(self):
+        text = (
+            Document("./docx/tags/sPre/pre_sub_sup.docx")
+            .get_text(linear_format=False)
+            .strip()
+        )
+        self.assertEqual("$ {}^{b}_{a}{c} $", text)
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -114,9 +114,7 @@ class Document:
                 else:
                     eqn = OMMLParser().parse(child)
                     text += (
-                        f"{self.inline_delimiter} "
-                        + eqn
-                        + f" {self.inline_delimiter}"
+                        f"{self.inline_delimiter} " + eqn + f" {self.inline_delimiter}"
                     )
                     self.equations.append(eqn)
             elif child.tag == qn("m:r") and linear_format:
