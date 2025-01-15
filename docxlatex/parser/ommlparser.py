@@ -162,6 +162,18 @@ class OMMLParser:
                 exp_content = self.parse(child)
         return "{}^{" + exp_content + "}_{" + sub_content + "}{" + content + "}"
 
+    def parse_rad(self, root: Element) -> str:
+        content = ""
+        order = ""
+        for child in root:
+            if child.tag == qn("m:deg"):
+                order = self.parse(child)
+            if child.tag == qn("m:e"):
+                content += self.parse(child)
+        if order:
+            return f"\\sqrt[{order}]{{{content}}}"
+        return f"\\sqrt{{{content}}}"
+
     parsers = {
         qn("m:r"): parse_r,
         qn("m:acc"): parse_acc,
@@ -173,4 +185,5 @@ class OMMLParser:
         qn("m:sSub"): parse_s_sub,
         qn("m:sSubSup"): parse_s_sub_sup,
         qn("m:sPre"): parse_s_pre,
+        qn("m:rad"): parse_rad,
     }

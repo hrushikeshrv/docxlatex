@@ -42,7 +42,7 @@ These OMML tags will be successfully parsed into LaTeX.
 | `oMath`      | Office Math                         |                                                 |
 | `oMathPara`  | Office Math Paragraph               |                                                 |
 | `r`          | Run                                 |                                                 |
-| `rad`        | Radical Object                      |                                                 |
+| `rad`        | Radical Object                      | Equation > Radical                              |
 | `sepChr`     | Delimiter Separator Character       |                                                 |
 | `sPre`       | Pre-Sub-Superscript Object          | Equation > Script > Subscripts and Superscripts |
 | `sSub`       | Subscript Object                    | Equation > Script > Subscripts and Superscripts |

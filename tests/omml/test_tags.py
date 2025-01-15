@@ -202,6 +202,24 @@ class TestTags(unittest.TestCase):
         )
         self.assertEqual("$ {}^{b}_{a}{c} $", text)
 
+    def test_rad(self):
+        text = (
+            Document("./docx/tags/rad/sqrt.docx").get_text(linear_format=False).strip()
+        )
+        self.assertEqual("$ \\sqrt{a} $", text)
+        text = (
+            Document("./docx/tags/rad/cube_root.docx")
+            .get_text(linear_format=False)
+            .strip()
+        )
+        self.assertEqual("$ \\sqrt[3]{a} $", text)
+        text = (
+            Document("./docx/tags/rad/nth_root.docx")
+            .get_text(linear_format=False)
+            .strip()
+        )
+        self.assertEqual("$ \\sqrt[n]{a} $", text)
+
 
 if __name__ == "__main__":
     unittest.main()
