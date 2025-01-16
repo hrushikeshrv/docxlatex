@@ -174,6 +174,36 @@ class OMMLParser:
             return f"\\sqrt[{order}]{{{content}}}"
         return f"\\sqrt{{{content}}}"
 
+    def parse_nary(self, root: Element) -> str:
+        character_map = {
+            8721: "\\sum",
+            8747: "\\int",
+            8748: '\\iint',
+        }
+        char = 8747
+        for child in root:
+            if child.tag == qn("m:naryPr"):
+                for child2 in child:
+                    if child2.tag == qn("m:chr"):
+                        char = ord(child2.attrib.get(qn("m:val")))
+        text = character_map[char]
+        sub = ''
+        sup = ''
+        content = ''
+        for child in root:
+            if child.tag == qn("m:sub"):
+                sub = self.parse(child)
+            if child.tag == qn("m:sup"):
+                sup = self.parse(child)
+            if child.tag == qn("m:e"):
+                content = self.parse(child)
+        if sub:
+            text += f"_{{{sub}}}"
+        if sup:
+            text += f"^{{{sup}}}"
+        text += "{" + content + "}"
+        return text
+
     parsers = {
         qn("m:r"): parse_r,
         qn("m:acc"): parse_acc,
@@ -186,4 +216,5 @@ class OMMLParser:
         qn("m:sSubSup"): parse_s_sub_sup,
         qn("m:sPre"): parse_s_pre,
         qn("m:rad"): parse_rad,
+        qn('m:nary'): parse_nary,
     }

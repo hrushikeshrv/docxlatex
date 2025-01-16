@@ -35,7 +35,7 @@ These OMML tags will be successfully parsed into LaTeX.
 | `mcs`        | Matrix Columns                      |                                                 |
 | `mPr`        | Matrix Properties                   |                                                 |
 | `mr`         | Matrix Row                          |                                                 |
-| `nary`       | n-ary Operator Object               |                                                 |
+| `nary`       | n-ary Operator Object               | Equation > Integral (and most large functions)  |
 | `naryLim`    | n-ary Limit Location                |                                                 |
 | `naryPr`     | n-ary Properties                    |                                                 |
 | `nor`        | Normal Text                         |                                                 |

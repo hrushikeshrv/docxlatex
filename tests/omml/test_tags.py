@@ -220,6 +220,22 @@ class TestTags(unittest.TestCase):
         )
         self.assertEqual("$ \\sqrt[n]{a} $", text)
 
+    def test_nary(self):
+        text = (
+            Document("./docx/tags/nary/integral.docx").get_text(linear_format=False).strip()
+        )
+        self.assertEqual("$ \\int{x dx} $", text)
+        text = Document("./docx/tags/nary/integral2.docx").get_text(linear_format=False).strip()
+        self.assertEqual("$ \\int_{0}^{1}{x dx} $", text)
+        text = Document("./docx/tags/nary/integral3.docx").get_text(linear_format=False).strip()
+        self.assertEqual("$ \\int_{0}^{1}{x dx} $", text)
+        text = Document("./docx/tags/nary/iint.docx").get_text(linear_format=False).strip()
+        self.assertEqual("$ \\iint{xy dxdy} $", text)
+        text = Document("./docx/tags/nary/iint2.docx").get_text(linear_format=False).strip()
+        self.assertEqual("$ \\iint_{0}^{1}{xy dxdy} $", text)
+        text = Document("./docx/tags/nary/iint3.docx").get_text(linear_format=False).strip()
+        self.assertEqual("$ \\iint_{0}^{1}{xy dxdy} $", text)
+
 
 if __name__ == "__main__":
     unittest.main()
