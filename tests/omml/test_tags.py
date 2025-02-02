@@ -222,19 +222,73 @@ class TestTags(unittest.TestCase):
 
     def test_nary(self):
         text = (
-            Document("./docx/tags/nary/integral.docx").get_text(linear_format=False).strip()
+            Document("./docx/tags/nary/integral.docx")
+            .get_text(linear_format=False)
+            .strip()
         )
         self.assertEqual("$ \\int{x dx} $", text)
-        text = Document("./docx/tags/nary/integral2.docx").get_text(linear_format=False).strip()
+        text = (
+            Document("./docx/tags/nary/integral2.docx")
+            .get_text(linear_format=False)
+            .strip()
+        )
         self.assertEqual("$ \\int_{0}^{1}{x dx} $", text)
-        text = Document("./docx/tags/nary/integral3.docx").get_text(linear_format=False).strip()
+        text = (
+            Document("./docx/tags/nary/integral3.docx")
+            .get_text(linear_format=False)
+            .strip()
+        )
         self.assertEqual("$ \\int_{0}^{1}{x dx} $", text)
-        text = Document("./docx/tags/nary/iint.docx").get_text(linear_format=False).strip()
+        text = (
+            Document("./docx/tags/nary/iint.docx").get_text(linear_format=False).strip()
+        )
         self.assertEqual("$ \\iint{xy dxdy} $", text)
-        text = Document("./docx/tags/nary/iint2.docx").get_text(linear_format=False).strip()
+        text = (
+            Document("./docx/tags/nary/iint2.docx")
+            .get_text(linear_format=False)
+            .strip()
+        )
         self.assertEqual("$ \\iint_{0}^{1}{xy dxdy} $", text)
-        text = Document("./docx/tags/nary/iint3.docx").get_text(linear_format=False).strip()
+        text = (
+            Document("./docx/tags/nary/iint3.docx")
+            .get_text(linear_format=False)
+            .strip()
+        )
         self.assertEqual("$ \\iint_{0}^{1}{xy dxdy} $", text)
+        text = (
+            Document("./docx/tags/nary/iiint.docx")
+            .get_text(linear_format=False)
+            .strip()
+        )
+        self.assertEqual("$ \\iiint{x dx} $", text)
+        text = (
+            Document("./docx/tags/nary/iiint2.docx")
+            .get_text(linear_format=False)
+            .strip()
+        )
+        self.assertEqual("$ \\iiint_{0}^{1}{x dx} $", text)
+        text = (
+            Document("./docx/tags/nary/iiint3.docx")
+            .get_text(linear_format=False)
+            .strip()
+        )
+        self.assertEqual("$ \\iiint_{0}^{1}{x dx} $", text)
+        text = (
+            Document("./docx/tags/nary/oint.docx").get_text(linear_format=False).strip()
+        )
+        self.assertEqual("$ \\oint{x dx} $", text)
+        text = (
+            Document("./docx/tags/nary/oint2.docx")
+            .get_text(linear_format=False)
+            .strip()
+        )
+        self.assertEqual("$ \\oint_{0}^{1}{x dx} $", text)
+        text = (
+            Document("./docx/tags/nary/oint3.docx")
+            .get_text(linear_format=False)
+            .strip()
+        )
+        self.assertEqual("$ \\oint_{0}^{1}{x dx} $", text)
 
 
 if __name__ == "__main__":

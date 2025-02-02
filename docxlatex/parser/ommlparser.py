@@ -178,7 +178,11 @@ class OMMLParser:
         character_map = {
             8721: "\\sum",
             8747: "\\int",
-            8748: '\\iint',
+            8748: "\\iint",
+            8749: "\\iiint",
+            8750: "\\oint",
+            8751: "\\oiint",
+            8752: "\\oiiint",
         }
         char = 8747
         for child in root:
@@ -186,10 +190,10 @@ class OMMLParser:
                 for child2 in child:
                     if child2.tag == qn("m:chr"):
                         char = ord(child2.attrib.get(qn("m:val")))
-        text = character_map[char]
-        sub = ''
-        sup = ''
-        content = ''
+        text = character_map.get(char, character_map[8721])
+        sub = ""
+        sup = ""
+        content = ""
         for child in root:
             if child.tag == qn("m:sub"):
                 sub = self.parse(child)
@@ -216,5 +220,5 @@ class OMMLParser:
         qn("m:sSubSup"): parse_s_sub_sup,
         qn("m:sPre"): parse_s_pre,
         qn("m:rad"): parse_rad,
-        qn('m:nary'): parse_nary,
+        qn("m:nary"): parse_nary,
     }
