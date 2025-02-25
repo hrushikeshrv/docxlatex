@@ -177,6 +177,7 @@ class OMMLParser:
     def parse_nary(self, root: Element) -> str:
         character_map = {
             8719: "\\prod",
+            8720: "\\coprod",
             8721: "\\sum",
             8747: "\\int",
             8748: "\\iint",
