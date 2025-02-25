@@ -289,6 +289,42 @@ class TestTags(unittest.TestCase):
             .strip()
         )
         self.assertEqual("$ \\oint_{0}^{1}{x dx} $", text)
+        text = (
+            Document("./docx/tags/nary/oiint.docx")
+            .get_text(linear_format=False)
+            .strip()
+        )
+        self.assertEqual("$ \\oiint{x dx} $", text)
+        text = (
+            Document("./docx/tags/nary/oiint2.docx")
+            .get_text(linear_format=False)
+            .strip()
+        )
+        self.assertEqual("$ \\oiint_{0}^{1}{x dx} $", text)
+        text = (
+            Document("./docx/tags/nary/oiint3.docx")
+            .get_text(linear_format=False)
+            .strip()
+        )
+        self.assertEqual("$ \\oiint_{0}^{1}{x dx} $", text)
+        text = (
+            Document("./docx/tags/nary/oiiint.docx")
+            .get_text(linear_format=False)
+            .strip()
+        )
+        self.assertEqual("$ \\oiiint{x dx} $", text)
+        text = (
+            Document("./docx/tags/nary/oiiint2.docx")
+            .get_text(linear_format=False)
+            .strip()
+        )
+        self.assertEqual("$ \\oiiint_{0}^{1}{x dx} $", text)
+        text = (
+            Document("./docx/tags/nary/oiiint3.docx")
+            .get_text(linear_format=False)
+            .strip()
+        )
+        self.assertEqual("$ \\oiiint_{0}^{1}{x dx} $", text)
 
 
 if __name__ == "__main__":
