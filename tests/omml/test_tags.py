@@ -325,6 +325,54 @@ class TestTags(unittest.TestCase):
             .strip()
         )
         self.assertEqual("$ \\oiiint_{0}^{1}{x dx} $", text)
+        text = (
+            Document("./docx/tags/nary/sum.docx").get_text(linear_format=False).strip()
+        )
+        self.assertEqual("$ \\sum{i} $", text)
+        text = (
+            Document("./docx/tags/nary/sum2.docx").get_text(linear_format=False).strip()
+        )
+        self.assertEqual("$ \\sum_{0}^{1}{i} $", text)
+        text = (
+            Document("./docx/tags/nary/sum3.docx").get_text(linear_format=False).strip()
+        )
+        self.assertEqual("$ \\sum_{0}^{1}{i} $", text)
+        text = (
+            Document("./docx/tags/nary/sum4.docx").get_text(linear_format=False).strip()
+        )
+        self.assertEqual("$ \\sum_{0}{i} $", text)
+        text = (
+            Document("./docx/tags/nary/sum5.docx").get_text(linear_format=False).strip()
+        )
+        self.assertEqual("$ \\sum_{0}{i} $", text)
+        text = (
+            Document("./docx/tags/nary/prod.docx").get_text(linear_format=False).strip()
+        )
+        self.assertEqual("$ \\prod{i} $", text)
+        text = (
+            Document("./docx/tags/nary/prod2.docx")
+            .get_text(linear_format=False)
+            .strip()
+        )
+        self.assertEqual("$ \\prod_{0}^{1}{i} $", text)
+        text = (
+            Document("./docx/tags/nary/prod3.docx")
+            .get_text(linear_format=False)
+            .strip()
+        )
+        self.assertEqual("$ \\prod_{0}^{1}{i} $", text)
+        text = (
+            Document("./docx/tags/nary/prod4.docx")
+            .get_text(linear_format=False)
+            .strip()
+        )
+        self.assertEqual("$ \\prod_{0}{i} $", text)
+        text = (
+            Document("./docx/tags/nary/prod5.docx")
+            .get_text(linear_format=False)
+            .strip()
+        )
+        self.assertEqual("$ \\prod_{0}{i} $", text)
 
 
 if __name__ == "__main__":
