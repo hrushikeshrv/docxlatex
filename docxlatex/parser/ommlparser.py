@@ -185,7 +185,9 @@ class OMMLParser:
             8750: "\\oint",
             8751: "\\oiint",
             8752: "\\oiiint",
-            8899: "\\cup",
+            8897: "\\bigvee",
+            8898: "\\bigcap",
+            8899: "\\bigcup",
         }
         char = 8747
         for child in root:

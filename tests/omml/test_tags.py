@@ -374,7 +374,9 @@ class TestTags(unittest.TestCase):
         )
         self.assertEqual("$ \\prod_{0}{i} $", text)
         text = (
-            Document("./docx/tags/nary/coprod.docx").get_text(linear_format=False).strip()
+            Document("./docx/tags/nary/coprod.docx")
+            .get_text(linear_format=False)
+            .strip()
         )
         self.assertEqual("$ \\coprod{i} $", text)
         text = (
@@ -404,31 +406,73 @@ class TestTags(unittest.TestCase):
         text = (
             Document("./docx/tags/nary/cup.docx").get_text(linear_format=False).strip()
         )
-        self.assertEqual("$ \\cup{i} $", text)
+        self.assertEqual("$ \\bigcup{i} $", text)
         text = (
-            Document("./docx/tags/nary/cup2.docx")
+            Document("./docx/tags/nary/cup2.docx").get_text(linear_format=False).strip()
+        )
+        self.assertEqual("$ \\bigcup_{0}^{1}{i} $", text)
+        text = (
+            Document("./docx/tags/nary/cup3.docx").get_text(linear_format=False).strip()
+        )
+        self.assertEqual("$ \\bigcup_{0}^{1}{i} $", text)
+        text = (
+            Document("./docx/tags/nary/cup4.docx").get_text(linear_format=False).strip()
+        )
+        self.assertEqual("$ \\bigcup_{0}{i} $", text)
+        text = (
+            Document("./docx/tags/nary/cup5.docx").get_text(linear_format=False).strip()
+        )
+        self.assertEqual("$ \\bigcup_{0}{i} $", text)
+        text = (
+            Document("./docx/tags/nary/cap.docx").get_text(linear_format=False).strip()
+        )
+        self.assertEqual("$ \\bigcap{i} $", text)
+        text = (
+            Document("./docx/tags/nary/cap2.docx").get_text(linear_format=False).strip()
+        )
+        self.assertEqual("$ \\bigcap_{0}^{1}{i} $", text)
+        text = (
+            Document("./docx/tags/nary/cap3.docx").get_text(linear_format=False).strip()
+        )
+        self.assertEqual("$ \\bigcap_{0}^{1}{i} $", text)
+        text = (
+            Document("./docx/tags/nary/cap4.docx").get_text(linear_format=False).strip()
+        )
+        self.assertEqual("$ \\bigcap_{0}{i} $", text)
+        text = (
+            Document("./docx/tags/nary/cap5.docx").get_text(linear_format=False).strip()
+        )
+        self.assertEqual("$ \\bigcap_{0}{i} $", text)
+        text = (
+            Document("./docx/tags/nary/bigvee.docx")
             .get_text(linear_format=False)
             .strip()
         )
-        self.assertEqual("$ \\cup_{0}^{1}{i} $", text)
+        self.assertEqual("$ \\bigvee{i} $", text)
         text = (
-            Document("./docx/tags/nary/cup3.docx")
+            Document("./docx/tags/nary/bigvee2.docx")
             .get_text(linear_format=False)
             .strip()
         )
-        self.assertEqual("$ \\cup_{0}^{1}{i} $", text)
+        self.assertEqual("$ \\bigvee_{0}^{1}{i} $", text)
         text = (
-            Document("./docx/tags/nary/cup4.docx")
+            Document("./docx/tags/nary/bigvee3.docx")
             .get_text(linear_format=False)
             .strip()
         )
-        self.assertEqual("$ \\cup_{0}{i} $", text)
+        self.assertEqual("$ \\bigvee_{0}^{1}{i} $", text)
         text = (
-            Document("./docx/tags/nary/cup5.docx")
+            Document("./docx/tags/nary/bigvee4.docx")
             .get_text(linear_format=False)
             .strip()
         )
-        self.assertEqual("$ \\cup_{0}{i} $", text)
+        self.assertEqual("$ \\bigvee_{0}{i} $", text)
+        text = (
+            Document("./docx/tags/nary/bigvee5.docx")
+            .get_text(linear_format=False)
+            .strip()
+        )
+        self.assertEqual("$ \\bigvee_{0}{i} $", text)
 
 
 if __name__ == "__main__":
