@@ -401,6 +401,34 @@ class TestTags(unittest.TestCase):
             .strip()
         )
         self.assertEqual("$ \\coprod_{0}{i} $", text)
+        text = (
+            Document("./docx/tags/nary/cup.docx").get_text(linear_format=False).strip()
+        )
+        self.assertEqual("$ \\cup{i} $", text)
+        text = (
+            Document("./docx/tags/nary/cup2.docx")
+            .get_text(linear_format=False)
+            .strip()
+        )
+        self.assertEqual("$ \\cup_{0}^{1}{i} $", text)
+        text = (
+            Document("./docx/tags/nary/cup3.docx")
+            .get_text(linear_format=False)
+            .strip()
+        )
+        self.assertEqual("$ \\cup_{0}^{1}{i} $", text)
+        text = (
+            Document("./docx/tags/nary/cup4.docx")
+            .get_text(linear_format=False)
+            .strip()
+        )
+        self.assertEqual("$ \\cup_{0}{i} $", text)
+        text = (
+            Document("./docx/tags/nary/cup5.docx")
+            .get_text(linear_format=False)
+            .strip()
+        )
+        self.assertEqual("$ \\cup_{0}{i} $", text)
 
 
 if __name__ == "__main__":
