@@ -185,6 +185,7 @@ class OMMLParser:
             8750: "\\oint",
             8751: "\\oiint",
             8752: "\\oiiint",
+            8896: "\\bigwedge",
             8897: "\\bigvee",
             8898: "\\bigcap",
             8899: "\\bigcup",

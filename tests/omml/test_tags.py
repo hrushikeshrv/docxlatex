@@ -473,6 +473,36 @@ class TestTags(unittest.TestCase):
             .strip()
         )
         self.assertEqual("$ \\bigvee_{0}{i} $", text)
+        text = (
+            Document("./docx/tags/nary/bigwedge.docx")
+            .get_text(linear_format=False)
+            .strip()
+        )
+        self.assertEqual("$ \\bigwedge{i} $", text)
+        text = (
+            Document("./docx/tags/nary/bigwedge2.docx")
+            .get_text(linear_format=False)
+            .strip()
+        )
+        self.assertEqual("$ \\bigwedge_{0}^{1}{i} $", text)
+        text = (
+            Document("./docx/tags/nary/bigwedge3.docx")
+            .get_text(linear_format=False)
+            .strip()
+        )
+        self.assertEqual("$ \\bigwedge_{0}^{1}{i} $", text)
+        text = (
+            Document("./docx/tags/nary/bigwedge4.docx")
+            .get_text(linear_format=False)
+            .strip()
+        )
+        self.assertEqual("$ \\bigwedge_{0}{i} $", text)
+        text = (
+            Document("./docx/tags/nary/bigwedge5.docx")
+            .get_text(linear_format=False)
+            .strip()
+        )
+        self.assertEqual("$ \\bigwedge_{0}{i} $", text)
 
 
 if __name__ == "__main__":
