@@ -504,6 +504,42 @@ class TestTags(unittest.TestCase):
         )
         self.assertEqual("$ \\bigwedge_{0}{i} $", text)
 
+    def test_d(self):
+        text = (
+            Document("./docx/tags/d/parenthesis.docx")
+            .get_text(linear_format=False)
+            .strip()
+        )
+        self.assertEqual("$ \\left( asdf \\right) $", text)
+        text = (
+            Document("./docx/tags/d/square_brackets.docx")
+            .get_text(linear_format=False)
+            .strip()
+        )
+        self.assertEqual("$ \\left[ a b c d \\right] $", text)
+        text = (
+            Document("./docx/tags/d/curly_brackets.docx")
+            .get_text(linear_format=False)
+            .strip()
+        )
+        self.assertEqual("$ \\left{ a b c d \\right} $", text)
+        text = (
+            Document("./docx/tags/d/angle_brackets.docx")
+            .get_text(linear_format=False)
+            .strip()
+        )
+        self.assertEqual("$ \\left\\langle a b c d \\right\\rangle $", text)
+        text = (
+            Document("./docx/tags/d/floor.docx").get_text(linear_format=False).strip()
+        )
+        self.assertEqual("$ \\left\\lfloor a b c d \\right\\rfloor $", text)
+        text = Document("./docx/tags/d/ceil.docx").get_text(linear_format=False).strip()
+        self.assertEqual("$ \\left\\lceil a b c d \\right\\rceil $", text)
+        text = Document("./docx/tags/d/abs.docx").get_text(linear_format=False).strip()
+        self.assertEqual("$ \\left| a b c d \\right| $", text)
+        text = Document("./docx/tags/d/norm.docx").get_text(linear_format=False).strip()
+        self.assertEqual("$ \\left\\| a b c d \\right\\| $", text)
+
 
 if __name__ == "__main__":
     unittest.main()

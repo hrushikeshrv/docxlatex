@@ -104,6 +104,56 @@ class OMMLParser:
         text += "}"
         return text
 
+    def parse_d(self, root: Element) -> str:
+        bracket_map = {
+            "(": "\\left(",
+            ")": "\\right)",
+            "[": "\\left[",
+            "]": "\\right]",
+            "{": "\\left{",
+            "}": "\\right}",
+            "〈": "\\left\\langle",
+            "〉": "\\right\\rangle",
+            "⌊": "\\left\\lfloor",
+            "⌋": "\\right\\rfloor",
+            "⌈": "\\left\\lceil",
+            "⌉": "\\right\\rceil",
+            "|": "\\left|",
+            "‖": "\\left\\|",
+        }
+        text = ""
+        start_bracket = "("
+        end_bracket = ")"
+        seperator = "|"
+        for child in root:
+            if child.tag == qn("m:dPr"):
+                for child2 in child:
+                    if child2.tag == qn("m:begChr"):
+                        start_bracket = child2.attrib.get(qn("m:val"))
+                    if child2.tag == qn("m:endChr"):
+                        end_bracket = child2.attrib.get(qn("m:val"))
+                    if child2.tag == qn("m:sepChr"):
+                        seperator = child2.attrib.get(qn("m:val"))
+        for child in root:
+            if child.tag == qn("m:e"):
+                if text:
+                    text += seperator
+                text += self.parse(child)
+        if start_bracket and end_bracket:
+            if end_bracket == "|":
+                text = bracket_map[start_bracket] + " " + text + " " + "\\right|"
+            elif end_bracket == "‖":
+                text = bracket_map[start_bracket] + " " + text + " " + "\\right\\|"
+            else:
+                text = (
+                    bracket_map[start_bracket]
+                    + " "
+                    + text
+                    + " "
+                    + bracket_map[end_bracket]
+                )
+        return text
+
     def parse_f(self, root: Element) -> str:
         text = "\\frac{"
         for child in root:
@@ -219,6 +269,7 @@ class OMMLParser:
         qn("m:acc"): parse_acc,
         qn("m:borderBox"): parse_border_box,
         qn("m:bar"): parse_bar,
+        qn("m:d"): parse_d,
         qn("m:groupChr"): parse_group_chr,
         qn("m:f"): parse_f,
         qn("m:sSup"): parse_s_sup,
