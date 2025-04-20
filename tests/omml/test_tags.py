@@ -518,6 +518,24 @@ class TestTags(unittest.TestCase):
         )
         self.assertEqual("$ \\left[ a b c d \\right] $", text)
         text = (
+            Document("./docx/tags/d/square_brackets_2.docx")
+            .get_text(linear_format=False)
+            .strip()
+        )
+        self.assertEqual("$ \\left[ a \\right[ $", text)
+        text = (
+            Document("./docx/tags/d/square_brackets_3.docx")
+            .get_text(linear_format=False)
+            .strip()
+        )
+        self.assertEqual("$ \\left] a \\right] $", text)
+        text = (
+            Document("./docx/tags/d/square_brackets_4.docx")
+            .get_text(linear_format=False)
+            .strip()
+        )
+        self.assertEqual("$ \\left] a \\right[ $", text)
+        text = (
             Document("./docx/tags/d/curly_brackets.docx")
             .get_text(linear_format=False)
             .strip()
@@ -539,6 +557,14 @@ class TestTags(unittest.TestCase):
         self.assertEqual("$ \\left| a b c d \\right| $", text)
         text = Document("./docx/tags/d/norm.docx").get_text(linear_format=False).strip()
         self.assertEqual("$ \\left\\| a b c d \\right\\| $", text)
+        text = Document("./docx/tags/d/double_brackets.docx").get_text(linear_format=False).strip()
+        self.assertEqual("$ [\\![ a ]\\!] $", text)
+        text = Document("./docx/tags/d/parenthesis_2.docx").get_text(linear_format=False).strip()
+        self.assertEqual("$ \\left( a|b \\right) $", text)
+        text = Document("./docx/tags/d/parenthesis_3.docx").get_text(linear_format=False).strip()
+        self.assertEqual("$ \\left( a $", text)
+        text = Document("./docx/tags/d/parenthesis_4.docx").get_text(linear_format=False).strip()
+        self.assertEqual("$ a \\right) $", text)
 
 
 if __name__ == "__main__":

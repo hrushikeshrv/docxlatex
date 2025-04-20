@@ -120,6 +120,8 @@ class OMMLParser:
             "⌉": "\\right\\rceil",
             "|": "\\left|",
             "‖": "\\left\\|",
+            '⟦': '[\\![',
+            '⟧': ']\\!]',
         }
         text = ""
         start_bracket = "("
@@ -139,19 +141,24 @@ class OMMLParser:
                 if text:
                     text += seperator
                 text += self.parse(child)
-        if start_bracket and end_bracket:
-            if end_bracket == "|":
-                text = bracket_map[start_bracket] + " " + text + " " + "\\right|"
-            elif end_bracket == "‖":
-                text = bracket_map[start_bracket] + " " + text + " " + "\\right\\|"
+        end_bracket_replacements = {
+            '|': '\\right|',
+            '‖': '\\right\\|',
+            '[': '\\right[',
+        }
+        start_bracket_replacements = {
+            ']': '\\left]',
+        }
+        if start_bracket:
+            if start_bracket in start_bracket_replacements:
+                text = start_bracket_replacements[start_bracket] + " " + text
             else:
-                text = (
-                    bracket_map[start_bracket]
-                    + " "
-                    + text
-                    + " "
-                    + bracket_map[end_bracket]
-                )
+                text = bracket_map[start_bracket] + " " + text
+        if end_bracket:
+            if end_bracket in end_bracket_replacements:
+                text += " " + end_bracket_replacements[end_bracket]
+            else:
+                text += " " + bracket_map[end_bracket]
         return text
 
     def parse_f(self, root: Element) -> str:
