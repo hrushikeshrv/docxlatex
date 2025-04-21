@@ -21,7 +21,7 @@ These OMML tags will be successfully parsed into LaTeX.
 | `eqArr`      | Equation Array                      |                                                   |
 | `f`          | Fraction Object                     | Equation > Fraction                               |
 | `fName`      | Function Name                       |                                                   |
-| `func`       | Function Apply Object               |                                                   |
+| `func`       | Function Apply Object               | Equation > Function                               |
 | `groupChr`   | Group-Character Object              | Equation > Accent > Accents                       |
 | `groupChrPr` | Group-Character Properties          |                                                   |
 | `grow`       | n-ary Grow                          |                                                   |

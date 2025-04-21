@@ -635,6 +635,30 @@ class TestTags(unittest.TestCase):
             "$ \\sinh_{}^{-1}{x} \\cosh_{}^{-1}{x} \\tanh_{}^{-1}{x} \\csch_{}^{-1}{x} \\sech_{}^{-1}{x} \\coth_{}^{-1}{x} $",
             text,
         )
+        text = (
+            Document("./docx/tags/func/log.docx").get_text(linear_format=False).strip()
+        )
+        self.assertEqual("$ \\log_{a}^{}{b} $", text)
+        text = (
+            Document("./docx/tags/func/log2.docx").get_text(linear_format=False).strip()
+        )
+        self.assertEqual("$ \\log_{}^{}{a} $", text)
+        text = (
+            Document("./docx/tags/func/log3.docx").get_text(linear_format=False).strip()
+        )
+        self.assertEqual("$ \\ln_{}^{}{a} $", text)
+        text = (
+            Document("./docx/tags/func/lim.docx").get_text(linear_format=False).strip()
+        )
+        self.assertEqual("$ \\lim\\limits_{a}^{}{b} $", text)
+        text = (
+            Document("./docx/tags/func/max.docx").get_text(linear_format=False).strip()
+        )
+        self.assertEqual("$ \\max\\limits_{a}^{}{b} $", text)
+        text = (
+            Document("./docx/tags/func/min.docx").get_text(linear_format=False).strip()
+        )
+        self.assertEqual("$ \\min\\limits_{a}^{}{b} $", text)
 
 
 if __name__ == "__main__":

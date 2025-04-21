@@ -200,6 +200,11 @@ class OMMLParser:
             "coth": "\\coth",
             "sech": "\\sech",
             "csch": "\\csch",
+            "log": "\\log",
+            "ln": "\\ln",
+            "min": "\\min",
+            "max": "\\max",
+            "lim": "\\lim",
         }
         subscript = ""
         superscript = ""
@@ -208,7 +213,7 @@ class OMMLParser:
         for child in root:
             if child.tag == qn("m:fName"):
                 for child2 in child:
-                    if child2.tag == qn("m:sSup") or child2.tag == qn("m:r"):
+                    if child2.tag in [qn("m:sSup"), qn("m:sSub"), qn("m:r")]:
                         for child3 in child2:
                             if child3.tag == qn("m:sub"):
                                 subscript = self.parse(child3)
@@ -216,10 +221,20 @@ class OMMLParser:
                                 superscript = self.parse(child3)
                             if child3.tag == qn("m:t") or child3.tag == qn("m:e"):
                                 func_name = self.parse(child3)
+                    elif child2.tag == qn("m:limLow"):
+                        for child3 in child2:
+                            if child3.tag == qn("m:lim"):
+                                for child4 in child3:
+                                    subscript += self.parse(child4)
+                            if child3.tag == qn("m:e"):
+                                func_name = self.parse(child3)
+
             if child.tag == qn("m:e"):
                 text += self.parse(child)
+        if func_name in ["lim", "max", "min"]:
+            return f"\\{func_name}\\limits_{{{subscript}}}^{{{superscript}}}{{{text}}}"
         if func_name not in function_map:
-            return ""
+            return f"{{{func_name}}}^{{{superscript}}}_{{{subscript}}}{{{text}}}"
         return function_map[func_name] + f"_{{{subscript}}}^{{{superscript}}}{{{text}}}"
 
     def parse_s_sup(self, root: Element) -> str:
