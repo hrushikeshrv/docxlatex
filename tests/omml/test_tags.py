@@ -557,20 +557,84 @@ class TestTags(unittest.TestCase):
         self.assertEqual("$ \\left| a b c d \\right| $", text)
         text = Document("./docx/tags/d/norm.docx").get_text(linear_format=False).strip()
         self.assertEqual("$ \\left\\| a b c d \\right\\| $", text)
-        text = Document("./docx/tags/d/double_brackets.docx").get_text(linear_format=False).strip()
+        text = (
+            Document("./docx/tags/d/double_brackets.docx")
+            .get_text(linear_format=False)
+            .strip()
+        )
         self.assertEqual("$ [\\![ a ]\\!] $", text)
-        text = Document("./docx/tags/d/parenthesis_2.docx").get_text(linear_format=False).strip()
+        text = (
+            Document("./docx/tags/d/parenthesis_2.docx")
+            .get_text(linear_format=False)
+            .strip()
+        )
         self.assertEqual("$ \\left( a|b \\right) $", text)
-        text = Document("./docx/tags/d/parenthesis_3.docx").get_text(linear_format=False).strip()
+        text = (
+            Document("./docx/tags/d/parenthesis_3.docx")
+            .get_text(linear_format=False)
+            .strip()
+        )
         self.assertEqual("$ \\left( a $", text)
-        text = Document("./docx/tags/d/parenthesis_4.docx").get_text(linear_format=False).strip()
+        text = (
+            Document("./docx/tags/d/parenthesis_4.docx")
+            .get_text(linear_format=False)
+            .strip()
+        )
         self.assertEqual("$ a \\right) $", text)
 
     def test_eq_array(self):
-        text = Document("./docx/tags/eqArr/stack.docx").get_text(linear_format=False).strip()
-        self.assertEqual("$ \\left{ \\begin{eqnarray*}a \\\\b \\\\\\end{eqnarray*} $", text)
-        text = Document("./docx/tags/eqArr/stack2.docx").get_text(linear_format=False).strip()
-        self.assertEqual("$ \\left{ \\begin{eqnarray*}a \\\\b \\\\c \\\\\\end{eqnarray*} $", text)
+        text = (
+            Document("./docx/tags/eqArr/stack.docx")
+            .get_text(linear_format=False)
+            .strip()
+        )
+        self.assertEqual(
+            "$ \\left{ \\begin{eqnarray*}a \\\\b \\\\\\end{eqnarray*} $", text
+        )
+        text = (
+            Document("./docx/tags/eqArr/stack2.docx")
+            .get_text(linear_format=False)
+            .strip()
+        )
+        self.assertEqual(
+            "$ \\left{ \\begin{eqnarray*}a \\\\b \\\\c \\\\\\end{eqnarray*} $", text
+        )
+
+    def test_func(self):
+        text = (
+            Document("./docx/tags/func/trig.docx").get_text(linear_format=False).strip()
+        )
+        self.assertEqual(
+            "$ \\sin_{}^{}{x} \\cos_{}^{}{x} \\tan_{}^{}{x} \\csc_{}^{}{x} \\sec_{}^{}{x} \\cot_{}^{}{x} $",
+            text,
+        )
+        text = (
+            Document("./docx/tags/func/inverse_trig.docx")
+            .get_text(linear_format=False)
+            .strip()
+        )
+        self.assertEqual(
+            "$ \\sin_{}^{-1}{x} \\cos_{}^{-1}{x} \\tan_{}^{-1}{x} \\csc_{}^{-1}{x} \\sec_{}^{-1}{x} \\cot_{}^{-1}{x} $",
+            text,
+        )
+        text = (
+            Document("./docx/tags/func/hyperbolic.docx")
+            .get_text(linear_format=False)
+            .strip()
+        )
+        self.assertEqual(
+            "$ \\sinh_{}^{}{x} \\cosh_{}^{}{x} \\tanh_{}^{}{x} \\csch_{}^{}{x} \\sech_{}^{}{x} \\coth_{}^{}{x} $",
+            text,
+        )
+        text = (
+            Document("./docx/tags/func/inverse_hyperbolic.docx")
+            .get_text(linear_format=False)
+            .strip()
+        )
+        self.assertEqual(
+            "$ \\sinh_{}^{-1}{x} \\cosh_{}^{-1}{x} \\tanh_{}^{-1}{x} \\csch_{}^{-1}{x} \\sech_{}^{-1}{x} \\coth_{}^{-1}{x} $",
+            text,
+        )
 
 
 if __name__ == "__main__":

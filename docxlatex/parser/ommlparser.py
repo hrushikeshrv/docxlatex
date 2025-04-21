@@ -15,6 +15,8 @@ class OMMLParser:
         :return: The LaTeX representation of the OMML input
         """
         text = ""
+        if root.tag == qn("m:t"):
+            text += "".join(root.itertext())
         for child in root:
             if child.tag in self.parsers:
                 text += self.parsers[child.tag](self, child)
@@ -28,6 +30,9 @@ class OMMLParser:
             elif child.tag in self.parsers:
                 text += self.parsers[child.tag](self, child)
         return text
+
+    def parse_t(self, root: Element):
+        return "".join(root.itertext())
 
     def parse_acc(self, root: Element) -> str:
         character_map = {
@@ -120,8 +125,8 @@ class OMMLParser:
             "⌉": "\\right\\rceil",
             "|": "\\left|",
             "‖": "\\left\\|",
-            '⟦': '[\\![',
-            '⟧': ']\\!]',
+            "⟦": "[\\![",
+            "⟧": "]\\!]",
         }
         text = ""
         start_bracket = "("
@@ -142,12 +147,12 @@ class OMMLParser:
                     text += seperator
                 text += self.parse(child)
         end_bracket_replacements = {
-            '|': '\\right|',
-            '‖': '\\right\\|',
-            '[': '\\right[',
+            "|": "\\right|",
+            "‖": "\\right\\|",
+            "[": "\\right[",
         }
         start_bracket_replacements = {
-            ']': '\\left]',
+            "]": "\\left]",
         }
         if start_bracket:
             if start_bracket in start_bracket_replacements:
@@ -165,7 +170,7 @@ class OMMLParser:
         text = "\\begin{eqnarray*}"
         for child in root:
             if child.tag == qn("m:e"):
-                text += self.parse(child) + ' \\\\'
+                text += self.parse(child) + " \\\\"
         text += "\\end{eqnarray*}"
         return text
 
@@ -180,6 +185,42 @@ class OMMLParser:
                 text += self.parse(child)
         text += "}"
         return text
+
+    def parse_func(self, root: Element) -> str:
+        function_map = {
+            "sin": "\\sin",
+            "cos": "\\cos",
+            "tan": "\\tan",
+            "cot": "\\cot",
+            "sec": "\\sec",
+            "csc": "\\csc",
+            "sinh": "\\sinh",
+            "cosh": "\\cosh",
+            "tanh": "\\tanh",
+            "coth": "\\coth",
+            "sech": "\\sech",
+            "csch": "\\csch",
+        }
+        subscript = ""
+        superscript = ""
+        text = ""
+        func_name = "sin"
+        for child in root:
+            if child.tag == qn("m:fName"):
+                for child2 in child:
+                    if child2.tag == qn("m:sSup") or child2.tag == qn("m:r"):
+                        for child3 in child2:
+                            if child3.tag == qn("m:sub"):
+                                subscript = self.parse(child3)
+                            if child3.tag == qn("m:sup"):
+                                superscript = self.parse(child3)
+                            if child3.tag == qn("m:t") or child3.tag == qn("m:e"):
+                                func_name = self.parse(child3)
+            if child.tag == qn("m:e"):
+                text += self.parse(child)
+        if func_name not in function_map:
+            return ""
+        return function_map[func_name] + f"_{{{subscript}}}^{{{superscript}}}{{{text}}}"
 
     def parse_s_sup(self, root: Element) -> str:
         content = ""
@@ -291,7 +332,9 @@ class OMMLParser:
         qn("m:sSub"): parse_s_sub,
         qn("m:sSubSup"): parse_s_sub_sup,
         qn("m:sPre"): parse_s_pre,
+        qn("m:t"): parse_t,
         qn("m:rad"): parse_rad,
         qn("m:nary"): parse_nary,
         qn("m:eqArr"): parse_eq_arr,
+        qn("m:func"): parse_func,
     }
