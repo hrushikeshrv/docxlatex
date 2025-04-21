@@ -566,6 +566,12 @@ class TestTags(unittest.TestCase):
         text = Document("./docx/tags/d/parenthesis_4.docx").get_text(linear_format=False).strip()
         self.assertEqual("$ a \\right) $", text)
 
+    def test_eq_array(self):
+        text = Document("./docx/tags/eqArr/stack.docx").get_text(linear_format=False).strip()
+        self.assertEqual("$ \\left{ \\begin{eqnarray*}a \\\\b \\\\\\end{eqnarray*} $", text)
+        text = Document("./docx/tags/eqArr/stack2.docx").get_text(linear_format=False).strip()
+        self.assertEqual("$ \\left{ \\begin{eqnarray*}a \\\\b \\\\c \\\\\\end{eqnarray*} $", text)
+
 
 if __name__ == "__main__":
     unittest.main()

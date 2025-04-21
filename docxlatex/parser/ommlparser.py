@@ -161,6 +161,14 @@ class OMMLParser:
                 text += " " + bracket_map[end_bracket]
         return text
 
+    def parse_eq_arr(self, root: Element) -> str:
+        text = "\\begin{eqnarray*}"
+        for child in root:
+            if child.tag == qn("m:e"):
+                text += self.parse(child) + ' \\\\'
+        text += "\\end{eqnarray*}"
+        return text
+
     def parse_f(self, root: Element) -> str:
         text = "\\frac{"
         for child in root:
@@ -285,4 +293,5 @@ class OMMLParser:
         qn("m:sPre"): parse_s_pre,
         qn("m:rad"): parse_rad,
         qn("m:nary"): parse_nary,
+        qn("m:eqArr"): parse_eq_arr,
     }
