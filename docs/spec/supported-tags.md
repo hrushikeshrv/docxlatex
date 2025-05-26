@@ -10,6 +10,7 @@ These OMML tags will be successfully parsed into LaTeX.
 | `barPr`      | Bar Properties                      |                                                   |
 | `begChr`     | Delimiter Beginning Character       |                                                   |
 | `borderBox`  | Border-Box Object                   | Equation > Accent > Boxed Formulas                |
+| `box`        | Box Object                          |                                                   |
 | `chr`        | Character                           |                                                   |
 | `count`      | Matrix Column Count                 |                                                   |
 | `d`          | Delimiter                           | Equation > Brackets                               |

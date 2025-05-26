@@ -623,7 +623,7 @@ class TestTags(unittest.TestCase):
             .strip()
         )
         self.assertEqual(
-            "$ \\sinh_{}^{}{x} \\cosh_{}^{}{x} \\tanh_{}^{}{x} \\csch_{}^{}{x} \\sech_{}^{}{x} \\coth_{}^{}{x} $",
+            "$ \\sinh_{}^{}{x} \\cosh_{}^{}{x} \\tanh_{}^{}{x} \\operatorname{csch}_{}^{}{x} \\operatorname{sech}_{}^{}{x} \\coth_{}^{}{x} $",
             text,
         )
         text = (
@@ -632,7 +632,7 @@ class TestTags(unittest.TestCase):
             .strip()
         )
         self.assertEqual(
-            "$ \\sinh_{}^{-1}{x} \\cosh_{}^{-1}{x} \\tanh_{}^{-1}{x} \\csch_{}^{-1}{x} \\sech_{}^{-1}{x} \\coth_{}^{-1}{x} $",
+            "$ \\sinh_{}^{-1}{x} \\cosh_{}^{-1}{x} \\tanh_{}^{-1}{x} \\operatorname{csch}_{}^{-1}{x} \\operatorname{sech}_{}^{-1}{x} \\coth_{}^{-1}{x} $",
             text,
         )
         text = (

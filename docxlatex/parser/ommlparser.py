@@ -1,4 +1,4 @@
-from xml.dom.minidom import Element
+from xml.etree.cElementTree import Element
 
 from docxlatex.parser.utils import qn
 
@@ -16,23 +16,37 @@ class OMMLParser:
         """
         text = ""
         if root.tag == qn("m:t"):
-            text += "".join(root.itertext())
+            return self.parse_t(root)
         for child in root:
             if child.tag in self.parsers:
                 text += self.parsers[child.tag](self, child)
         return text
 
+    def parse_e(self, root: Element) -> str:
+        text = ""
+        for child in root:
+            text += self.parse(child)
+        return text
+
     def parse_r(self, root: Element) -> str:
         text = ""
         for child in root:
-            if child.tag == qn("m:t"):
-                text += "".join(child.itertext())
-            elif child.tag in self.parsers:
-                text += self.parsers[child.tag](self, child)
+            text += self.parse(child)
         return text
 
     def parse_t(self, root: Element):
-        return "".join(root.itertext())
+        symbol_map = {
+            "≜": "\\triangleq",
+            "≝": "\\stackrel{\\tiny def}{=}",
+            "≞": "\\stackrel{\\tiny m}{=}",
+        }
+        text = root.text.split()
+        if not text:
+            return " "
+        for i, t in enumerate(text):
+            if t in symbol_map:
+                text[i] = symbol_map[t]
+        return " ".join(text)
 
     def parse_acc(self, root: Element) -> str:
         character_map = {
@@ -93,20 +107,53 @@ class OMMLParser:
         text += "}"
         return text
 
+    def parse_box(self, root: Element) -> str:
+        text = ""
+        for child in root:
+            text += self.parse(child)
+        return text
+
     def parse_group_chr(self, root: Element) -> str:
+        character_map = {
+            "←": "\\leftarrow",
+            "→": "\\rightarrow",
+            "↔": "\\leftrightarrow",
+            "⇐": "\\Leftarrow",
+            "⇒": "\\Rightarrow",
+            "⇔": "\\Leftrightarrow",
+        }
         text = "\\underbrace{"
+        bottom = False
         for child in root:
             if child.tag == qn("m:groupChrPr"):
+                for child2 in child:
+                    if child2.tag == qn("m:chr"):
+                        char = child2.attrib.get(qn("m:val"))
+                        if char in character_map:
+                            text = character_map[char]
                 for child2 in child:
                     if (
                         child2.tag == qn("m:pos")
                         and child2.attrib.get(qn("m:val")) == "top"
                     ):
-                        text = "\\overbrace{"
+                        # If m:pos is set to "top", the symbol is supposed to
+                        # be on top and the text is actually supposed to be under
+                        bottom = True
+
+        content = ""
         for child in root:
             if child.tag == qn("m:e"):
-                text += self.parse(child)
-        text += "}"
+                content = self.parse(child)
+        if text == "\\underbrace{":
+            if bottom:
+                text = "\\overbrace{" + content + "}"
+            else:
+                text += content + "}"
+        else:
+            if not bottom:
+                text = "\\overset{" + content + "}" + "{" + text + "}"
+            else:
+                text = "\\underset{" + content + "}" + "{" + text + "}"
         return text
 
     def parse_d(self, root: Element) -> str:
@@ -198,8 +245,8 @@ class OMMLParser:
             "cosh": "\\cosh",
             "tanh": "\\tanh",
             "coth": "\\coth",
-            "sech": "\\sech",
-            "csch": "\\csch",
+            "sech": "\\operatorname{sech}",
+            "csch": "\\operatorname{csch}",
             "log": "\\log",
             "ln": "\\ln",
             "min": "\\min",
@@ -340,7 +387,9 @@ class OMMLParser:
         qn("m:acc"): parse_acc,
         qn("m:borderBox"): parse_border_box,
         qn("m:bar"): parse_bar,
+        qn("m:box"): parse_box,
         qn("m:d"): parse_d,
+        qn("m:e"): parse_e,
         qn("m:groupChr"): parse_group_chr,
         qn("m:f"): parse_f,
         qn("m:sSup"): parse_s_sup,

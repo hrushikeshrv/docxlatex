@@ -89,7 +89,7 @@ class Document:
         :param xml:str - XML string to be parsed into an xml.etree.Element object.
         :param linear_format:bool - True if the equations in the document have been converted into
         linear format in LaTeX syntax. False if the equations are in professional formatting.
-        We assume the equations are not in unicode or any other format.
+        We assume the equations are not in Unicode or any other format.
         :return text:str - The text contained in the tag
         """
         text = ""

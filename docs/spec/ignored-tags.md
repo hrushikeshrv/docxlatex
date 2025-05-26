@@ -10,7 +10,6 @@ These OMML tags will be ignored while parsing into LaTeX.
 | `argSz`       | Argument Size                                     |
 | `baseJc`      | Matrix Base Justification                         |
 | `borderBoxPr` | Border-Box Properties                             |
-| `box`         | Box Object                                        |
 | `boxPr`       | Box Properties                                    |
 | `brk`         | Break                                             |
 | `brkBin`      | Break on Binary Operators                         |
