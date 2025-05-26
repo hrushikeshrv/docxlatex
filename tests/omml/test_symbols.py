@@ -21,8 +21,24 @@ class TestSymbols(unittest.TestCase):
         )
 
     def test_basic_math_symbols(self):
-        text = Document("./docx/basic_math_operators.docx").get_text(linear_format=False).strip()
-        self.assertEqual(text, "$ ±∞=≠~×÷!∝<≪>≫≤≥∓≅≈≡∀∁∂√∛∜∪∩∅%°℉℃∆∇∃∄∈∋←↑→↓↔∴+-¬αβγδεϵθϑμπρστφω*∙⋮⋯⋰⋱ℵℶ∎ $")
+        text = (
+            Document("./docx/basic_math_operators.docx")
+            .get_text(linear_format=False)
+            .strip()
+        )
+        self.assertEqual(
+            text,
+            "$ ±∞=≠~×÷!∝<≪>≫≤≥∓≅≈≡∀∁∂√∛∜∪∩∅%°℉℃∆∇∃∄∈∋←↑→↓↔∴+-¬αβγδεϵθϑμπρστφω*∙⋮⋯⋰⋱ℵℶ∎ $",
+        )
+
+    def test_greek_letters(self):
+        text = (
+            Document("./docx/greek_letters.docx").get_text(linear_format=False).strip()
+        )
+        self.assertEqual(
+            text,
+            "$ αβγδεϵζηθϑικλμνξοπϖρϱσςτυφϕχψω $\n\n$ ΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩ $",
+        )
 
 
 if __name__ == "__main__":
