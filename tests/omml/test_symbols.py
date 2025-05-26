@@ -4,6 +4,7 @@ import unittest
 
 class TestSymbols(unittest.TestCase):
     def test_operators(self):
+        """Test extraction of operators and operator structures found in the Equation > Operator menu."""
         text = Document("./docx/operators.docx").get_text(linear_format=False).strip()
         self.assertEqual(
             text,
@@ -18,6 +19,10 @@ class TestSymbols(unittest.TestCase):
             text,
             "$ \\underset{a}{\\leftarrow} \\underset{a}{\\rightarrow} \\overset{a}{\\leftarrow} \\overset{a}{\\rightarrow} \\underset{a}{\\Leftarrow} \\underset{a}{\\Rightarrow} \\overset{a}{\\Leftarrow} \\overset{a}{\\Rightarrow} \\underset{a}{\\leftrightarrow} \\overset{a}{\\leftrightarrow} \\underset{a}{\\Leftrightarrow} \\overset{a}{\\Leftrightarrow} $",
         )
+
+    def test_basic_math_symbols(self):
+        text = Document("./docx/basic_math_operators.docx").get_text(linear_format=False).strip()
+        self.assertEqual(text, "$ ±∞=≠~×÷!∝<≪>≫≤≥∓≅≈≡∀∁∂√∛∜∪∩∅%°℉℃∆∇∃∄∈∋←↑→↓↔∴+-¬αβγδεϵθϑμπρστφω*∙⋮⋯⋰⋱ℵℶ∎ $")
 
 
 if __name__ == "__main__":
