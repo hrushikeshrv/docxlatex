@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "docxlatex"
 version = "0.1.6"
-description = "Extract text from .docx files with support for inserted equations"
+description = "Extract text and mathematical equations from .docx files"
 readme = "README.md"
 requires-python = ">=3.8"
 license = { text = "MIT" }
