@@ -52,6 +52,61 @@ class TestSymbols(unittest.TestCase):
             "$ ∀∁C∂ðℇϜℲgHHhℏ℩ıIjϰLlN℘QRRRZ℧ÅB℮E∃∄FMoℵℶℷℸ $",
         )
 
+    def test_common_binary_operators(self):
+        text = (
+            Document("./docx/common_binary_operators.docx")
+            .get_text(linear_format=False)
+            .strip()
+        )
+        self.assertEqual(
+            text,
+            "$ +-÷×±∓∝∕*∘∙⋅∩∪⊎⊓⊔∧∨ $",
+        )
+
+    def test_common_relational_operators(self):
+        text = (
+            Document("./docx/common_relational_operators.docx")
+            .get_text(linear_format=False)
+            .strip()
+        )
+        self.assertEqual(
+            text,
+            "$ =≠<>≤≥≮≰≯≱≡∼≃≈≅≢≄≉≇∝≪≫∈∋∉⊂⊃⊆⊇≺≻≼≽⊏⊐⊑⊒∥⊥⊢⊣⋈≍ $",
+        )
+
+    def test_basic_nary_operators(self):
+        text = (
+            Document("./docx/basic_nary_operators.docx")
+            .get_text(linear_format=False)
+            .strip()
+        )
+        self.assertEqual(
+            text,
+            "$ ∑∫∬∭∮∯∰∱∲∳∏∐⋂⋃⋀⋁⨀⨂⨁⨄⨃ $",
+        )
+
+    def test_advanced_binary_operators(self):
+        text = (
+            Document("./docx/advanced_binary_operators.docx")
+            .get_text(linear_format=False)
+            .strip()
+        )
+        self.assertEqual(
+            text,
+            "$ ∔∸∖⋒⋓⊟⊠⊡⊞⋇⋉⋊⋋⋌⋏⋎⊝⊺⊕⊖⊗⊘⊙⊛⊚†‡⋆⋄≀△⋀⋁⨀⨂⨁⨅⨆⨄⨃ $",
+        )
+
+    def test_advanced_relational_operators(self):
+        text = (
+            Document("./docx/advanced_relational_operators.docx")
+            .get_text(linear_format=False)
+            .strip()
+        )
+        self.assertEqual(
+            text,
+            "$ ∴∵⋘⋙≦≧≲≳⋖⋗≶⋚≷⋛≑≒≓∽≊⋍≼≽⋞⋟≾≿⋜⋝⊆⊇⊲⊳⊴⊵⊨⋐⋑⊏⊐⊩⊪≖≗≜≏≎∝≬⋔≐⋈ $",
+        )
+
 
 if __name__ == "__main__":
     unittest.main()
