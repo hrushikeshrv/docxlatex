@@ -29,6 +29,8 @@ class OMMLParser:
         return text
 
     def parse_r(self, root: Element) -> str:
+        # TODO: Add support for m:rPr and m:scr to support different character styles
+        #    For now, we just parse the text content of m:r
         text = ""
         for child in root:
             text += self.parse(child)

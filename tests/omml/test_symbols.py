@@ -40,6 +40,18 @@ class TestSymbols(unittest.TestCase):
             "$ αβγδεϵζηθϑικλμνξοπϖρϱσςτυφϕχψω $\n\n$ ΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩ $",
         )
 
+    def test_letter_like_symbols(self):
+        # TODO: Add support for different scripts of all letter-like symbols
+        text = (
+            Document("./docx/letter_like_symbols.docx")
+            .get_text(linear_format=False)
+            .strip()
+        )
+        self.assertEqual(
+            text,
+            "$ ∀∁C∂ðℇϜℲgHHhℏ℩ıIjϰLlN℘QRRRZ℧ÅB℮E∃∄FMoℵℶℷℸ $",
+        )
+
 
 if __name__ == "__main__":
     unittest.main()
