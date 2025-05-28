@@ -17,11 +17,11 @@ class Document:
 
     def get_text(
         self,
-        linear_format: bool = True,
+        linear_format: bool = False,
         get_header_text: bool = False,
         get_footer_text: bool = False,
         image_dir: str | None = None,
-        extensions: list[str] | None = None,
+        image_extensions: list[str] | tuple[str] | None = None,
     ):
         """
         Extract the text from the .docx file while converting the equations in the document
@@ -29,16 +29,16 @@ class Document:
 
         :param linear_format:bool - True if the inserted equations in the document have been converted
             into linear format in LaTeX syntax, False if the equations are in professional formatting.
-            We assume the equations are not in unicode or any other format. Defaults to True.
+            We assume the equations are not in Unicode or any other format. Defaults to False.
         :param get_header_text:bool - True if you want to extract text from the header, False otherwise
         :param get_footer_text:bool - True if you want to extract text from the footer, False otherwise
         :param image_dir:str - The path to the directory where you want to store images
-        :param extensions:List[str], tuple - A list of tuple of string of the extensions you want to
+        :param image_extensions:List[str], tuple - A list or tuple of strings of the extensions you want to
             extract (['.jpg', '.png', ...])
         :return text:str - The extracted text
         """
-        if extensions is None:
-            extensions = [".jpg", ".jpeg", ".png", ".svg", ".bmp", ".gif"]
+        if image_extensions is None:
+            image_extensions = [".jpg", ".jpeg", ".png", ".svg", ".bmp", ".gif"]
         zip_f = zipfile.ZipFile(self.document)
         text = ""
         for f in zip_f.namelist():
@@ -52,7 +52,7 @@ class Document:
         if image_dir is not None:
             for f in zip_f.namelist():
                 _, extension = os.path.splitext(f)
-                if extension in extensions:
+                if extension in image_extensions:
                     destination = os.path.join(image_dir, os.path.basename(f))
                     with open(destination, "wb") as destination_file:
                         destination_file.write(zip_f.read(f))
