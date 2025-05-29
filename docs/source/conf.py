@@ -9,7 +9,7 @@
 project = 'docxlatex'
 copyright = '2025, Hrushikesh Vaidya (@hrushikeshrv)'
 author = 'Hrushikesh Vaidya (@hrushikeshrv)'
-release = 'v1.0.0'
+release = 'v1.1.0'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration

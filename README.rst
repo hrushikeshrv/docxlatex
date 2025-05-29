@@ -61,7 +61,7 @@ API
 ~~~
 Here is a simple example of how an equation is extracted from a .docx file containing the Fourier series equation:
 
-.. image:: /assets/fourier-series-docx.png
+.. image:: docs/source/assets/fourier-series-docx.png
    :alt: Fourier series equation in a .docx file
 
 Using the API as shown above:
