@@ -61,7 +61,7 @@ API
 ~~~
 Here is a simple example of how an equation is extracted from a .docx file containing the Fourier series equation:
 
-.. image:: docs/source/assets/fourier-series-docx.png
+.. image:: docs_src/assets/fourier-series-docx.png
    :alt: Fourier series equation in a .docx file
 
 Using the API as shown above:
@@ -98,8 +98,3 @@ Issues
 docxlatex is not perfect, and you may encounter issues with certain .docx files, especially those with complex formatting or non-standard elements, or on older versions of Word.
 
 If you find a bug or have a feature request, please open an issue on the `GitHub repository <https://github.com/hrushikeshrv/docxlatex/issues/new>`_. All bug reports and feature requests are welcome and greatly appreciated!
-
-.. toctree::
-   :maxdepth: 2
-   :caption: Contents:
-
