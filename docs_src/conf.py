@@ -6,6 +6,10 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
+
+# ! To build docs, run `make html` in the docs_src/ directory.
+
+
 project = 'docxlatex'
 copyright = '2025, Hrushikesh Vaidya (@hrushikeshrv)'
 author = 'Hrushikesh Vaidya (@hrushikeshrv)'
