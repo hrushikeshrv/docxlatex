@@ -168,6 +168,8 @@ class OMMLParser:
             "}": "\\right}",
             "〈": "\\left\\langle",
             "〉": "\\right\\rangle",
+            "⟨": "\\left\\langle",
+            "⟩": "\\right\\rangle",
             "⌊": "\\left\\lfloor",
             "⌋": "\\right\\rfloor",
             "⌈": "\\left\\lceil",
