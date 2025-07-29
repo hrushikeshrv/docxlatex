@@ -1,4 +1,4 @@
-__version__ = "1.1.0"
+__version__ = "1.1.1"
 
 from docxlatex.docxlatex import Document
 from docxlatex.parser import utils
