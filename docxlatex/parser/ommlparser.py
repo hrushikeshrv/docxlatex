@@ -205,8 +205,8 @@ class OMMLParser:
         start_bracket_replacements = {
             "]": "\\left]",
         }
-        start = ''
-        end = ''
+        start = ""
+        end = ""
         if start_bracket:
             if start_bracket in start_bracket_replacements:
                 start = start_bracket_replacements[start_bracket] + " "
