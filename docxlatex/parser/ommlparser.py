@@ -205,17 +205,30 @@ class OMMLParser:
         start_bracket_replacements = {
             "]": "\\left]",
         }
+        start = ''
+        end = ''
         if start_bracket:
             if start_bracket in start_bracket_replacements:
-                text = start_bracket_replacements[start_bracket] + " " + text
+                start = start_bracket_replacements[start_bracket] + " "
             else:
-                text = bracket_map[start_bracket] + " " + text
+                start = bracket_map[start_bracket] + " "
         if end_bracket:
             if end_bracket in end_bracket_replacements:
-                text += " " + end_bracket_replacements[end_bracket]
+                end = " " + end_bracket_replacements[end_bracket]
             else:
-                text += " " + bracket_map[end_bracket]
-        return text
+                end = " " + bracket_map[end_bracket]
+        # If there is no end bracket and this tag contains an m:eqArr tag as a
+        # child, we assume that the eqArr should be translated to a cases environment
+        # instead of an eqnarray* environment.
+        else:
+            for child in root:
+                if child.tag == qn("m:e"):
+                    for child2 in child:
+                        if child2.tag == qn("m:eqArr"):
+                            text = text.replace("\\begin{eqnarray*}", "")
+                            text = text.replace("\\end{eqnarray*}", "")
+                            return "\\begin{cases} " + text + " \\end{cases}"
+        return start + text + end
 
     def parse_eq_arr(self, root: Element) -> str:
         text = "\\begin{eqnarray*}"
