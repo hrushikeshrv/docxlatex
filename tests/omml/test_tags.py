@@ -588,16 +588,22 @@ class TestTags(unittest.TestCase):
             .get_text(linear_format=False)
             .strip()
         )
-        self.assertEqual(
-            "$ \\left{ \\begin{eqnarray*}a \\\\b \\\\\\end{eqnarray*} $", text
-        )
+        self.assertEqual("$ \\begin{cases} a \\\\b \\\\ \\end{cases} $", text)
         text = (
             Document("./docx/tags/eqArr/stack2.docx")
             .get_text(linear_format=False)
             .strip()
         )
+        self.assertEqual("$ \\begin{cases} a \\\\b \\\\c \\\\ \\end{cases} $", text)
+
+        text = (
+            Document("./docx/tags/eqArr/issue_9.docx")
+            .get_text(linear_format=False)
+            .strip()
+        )
         self.assertEqual(
-            "$ \\left{ \\begin{eqnarray*}a \\\\b \\\\c \\\\\\end{eqnarray*} $", text
+            "$ f\\left( n \\right)=\\begin{cases} \\left\\langle 0,0 \\right\\rangle,&{χ}_{TH}(n)=1 \\\\\\left\\langle 0,m \\right\\rangle, &otherwise \\\\ \\end{cases} $",
+            text,
         )
 
     def test_func(self):
