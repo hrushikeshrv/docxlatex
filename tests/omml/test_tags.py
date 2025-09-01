@@ -582,6 +582,56 @@ class TestTags(unittest.TestCase):
         )
         self.assertEqual("$ a \\right) $", text)
 
+    def test_m(self):
+        text = (
+            Document("./docx/tags/m/simple-matrix.docx")
+            .get_text(linear_format=False)
+            .strip()
+        )
+        self.assertEqual("$ \\begin{pmatrix} 1 & 2 \\\\ 3 & 4 \\end{pmatrix} $", text)
+        text = (
+            Document("./docx/tags/m/simple-matrix-2.docx")
+            .get_text(linear_format=False)
+            .strip()
+        )
+        self.assertEqual("$ \\begin{bmatrix} 1 & 2 \\\\ 3 & 4 \\end{bmatrix} $", text)
+        text = (
+            Document("./docx/tags/m/matrix-no-brackets.docx")
+            .get_text(linear_format=False)
+            .strip()
+        )
+        self.assertEqual("$ \\begin{matrix} 1 & 2 \\\\ 3 & 4 \\end{matrix} $", text)
+        text = (
+            Document("./docx/tags/m/matrix-no-brackets-3x3.docx")
+            .get_text(linear_format=False)
+            .strip()
+        )
+        self.assertEqual(
+            "$ \\begin{matrix} 1 & 2 & 3 \\\\ 4 & 5 & 6 \\\\ 7 & 8 & 9 \\end{matrix} $",
+            text,
+        )
+        text = (
+            Document("./docx/tags/m/determinant.docx")
+            .get_text(linear_format=False)
+            .strip()
+        )
+        self.assertEqual("$ \\begin{vmatrix} 1 & 2 \\\\ 3 & 4 \\end{vmatrix} $", text)
+        text = (
+            Document("./docx/tags/m/matrix-double-bars.docx")
+            .get_text(linear_format=False)
+            .strip()
+        )
+        self.assertEqual("$ \\begin{Vmatrix} 1 & 2 \\\\ 3 & 4 \\end{Vmatrix} $", text)
+        text = (
+            Document("./docx/tags/m/sparse-matrix.docx")
+            .get_text(linear_format=False)
+            .strip()
+        )
+        self.assertEqual(
+            "$ \\begin{pmatrix} 1 & ⋯ & 2 \\\\ ⋮ & ⋱ & ⋮ \\\\ 3 & ⋯ & 4 \\end{pmatrix} $",
+            text,
+        )
+
     def test_eq_array(self):
         text = (
             Document("./docx/tags/eqArr/stack.docx")
