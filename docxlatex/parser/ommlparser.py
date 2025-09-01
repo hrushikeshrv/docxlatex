@@ -183,15 +183,19 @@ class OMMLParser:
         start_bracket = "("
         end_bracket = ")"
         seperator = "|"
+        is_matrix = False
         for child in root:
-            if child.tag == qn("m:dPr"):
-                for child2 in child:
+            for child2 in child:
+                if child.tag == qn("m:dPr"):
                     if child2.tag == qn("m:begChr"):
                         start_bracket = child2.attrib.get(qn("m:val"))
                     if child2.tag == qn("m:endChr"):
                         end_bracket = child2.attrib.get(qn("m:val"))
                     if child2.tag == qn("m:sepChr"):
                         seperator = child2.attrib.get(qn("m:val"))
+                if child2.tag == qn("m:m"):
+                    is_matrix = True
+
         for child in root:
             if child.tag == qn("m:e"):
                 if text:
@@ -228,6 +232,15 @@ class OMMLParser:
                             text = text.replace("\\begin{eqnarray*}", "")
                             text = text.replace("\\end{eqnarray*}", "")
                             return "\\begin{cases} " + text + " \\end{cases}"
+        if is_matrix:
+            if start_bracket == "(" and end_bracket == ")":
+                return text.replace("{matrix}", "{pmatrix}")
+            elif start_bracket == "|" and end_bracket == "|":
+                return text.replace("{matrix}", "{vmatrix}")
+            elif start_bracket == "‖" and end_bracket == "‖":
+                return text.replace("{matrix}", "{Vmatrix}")
+            else:
+                return text.replace("{matrix}", "{bmatrix}")
         return start + text + end
 
     def parse_eq_arr(self, root: Element) -> str:
@@ -249,6 +262,19 @@ class OMMLParser:
                 text += self.parse(child)
         text += "}"
         return text
+
+    def parse_m(self, root: Element) -> str:
+        text = "\\begin{matrix} "
+        text += self.parse(root)[:-3]  # Remove the last ' \\'
+        text += "\\end{matrix}"
+        return text
+
+    def parse_mr(self, root: Element) -> str:
+        text = ""
+        for child in root:
+            if child.tag == qn("m:e"):
+                text += self.parse(child) + " & "
+        return text[:-2] + "\\\\ "  # Remove the last ' & '
 
     def parse_func(self, root: Element) -> str:
         function_map = {
@@ -418,4 +444,6 @@ class OMMLParser:
         qn("m:nary"): parse_nary,
         qn("m:eqArr"): parse_eq_arr,
         qn("m:func"): parse_func,
+        qn("m:m"): parse_m,
+        qn("m:mr"): parse_mr,
     }
