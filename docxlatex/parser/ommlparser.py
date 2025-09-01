@@ -399,6 +399,33 @@ class OMMLParser:
         text += "{" + content + "}"
         return text
 
+    def parse_m(self, root: Element) -> str:
+        """
+        Parse matrix object (m:m tag) into LaTeX matrix format.
+        A matrix contains multiple matrix rows (m:mr).
+        """
+        rows = []
+        for child in root:
+            if child.tag == qn("m:mr"):
+                rows.append(self.parse_mr(child))
+        
+        # Join rows with \\ for LaTeX matrix format
+        matrix_content = " \\\\ ".join(rows)
+        return f"\\begin{{pmatrix}} {matrix_content} \\end{{pmatrix}}"
+
+    def parse_mr(self, root: Element) -> str:
+        """
+        Parse matrix row (m:mr tag) into LaTeX row format.
+        A matrix row contains multiple elements (m:e).
+        """
+        elements = []
+        for child in root:
+            if child.tag == qn("m:e"):
+                elements.append(self.parse(child))
+        
+        # Join elements with & for LaTeX matrix row format
+        return " & ".join(elements)
+
     parsers = {
         qn("m:r"): parse_r,
         qn("m:acc"): parse_acc,
@@ -418,4 +445,6 @@ class OMMLParser:
         qn("m:nary"): parse_nary,
         qn("m:eqArr"): parse_eq_arr,
         qn("m:func"): parse_func,
+        qn("m:m"): parse_m,
+        qn("m:mr"): parse_mr,
     }
