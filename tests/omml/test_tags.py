@@ -666,6 +666,21 @@ class TestTags(unittest.TestCase):
         )
         self.assertEqual("$ \\min\\limits_{a}^{}{b} $", text)
 
+    def test_matrix(self):
+        text = (
+            Document("./docx/tags/eqArr/issue_10.docx").get_text(linear_format=False).strip()
+        )
+        self.assertEqual("$ \left( \\begin{pmatrix} 1 & 2 \\\\ 3 & 4 \\end{pmatrix} \\right) $", text)       
+
+    def test_matrix_3x3(self):
+        """
+        Test a 3x3 matrix to ensure the functionality scales properly.
+        """
+        text = (
+            Document("./docx/tags/eqArr/issue_10_2.docx").get_text(linear_format=False).strip()
+        )
+        self.assertEqual("$ \left( \\begin{pmatrix} 1 & 2 & 3 \\\\ 4 & 5 & 6 \\\\ 7 & 8 & 9 \\end{pmatrix} \\right) $", text)
+
 
 if __name__ == "__main__":
     unittest.main()
