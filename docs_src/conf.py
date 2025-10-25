@@ -13,7 +13,7 @@
 project = "docxlatex"
 copyright = "2025, Hrushikesh Vaidya (@hrushikeshrv)"
 author = "Hrushikesh Vaidya (@hrushikeshrv)"
-release = "v1.2.1"
+release = "v1.2.2"
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
