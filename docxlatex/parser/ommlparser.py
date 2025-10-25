@@ -15,11 +15,16 @@ class OMMLParser:
         :return: The LaTeX representation of the OMML input
         """
         text = ""
-        if root.tag == qn("m:t"):
-            return self.parse_t(root)
-        for child in root:
-            if child.tag in self.parsers:
-                text += self.parsers[child.tag](self, child)
+        try:
+            if root.tag == qn("m:t"):
+                return self.parse_t(root)
+            for child in root:
+                if child.tag in self.parsers:
+                    text += self.parsers[child.tag](self, child)
+        except AttributeError:
+            # In case of missing attributes on OMML tags,
+            # we return an empty string (ref:issue_14)
+            return ""
         return text
 
     def parse_e(self, root: Element) -> str:
