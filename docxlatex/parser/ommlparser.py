@@ -47,12 +47,26 @@ class OMMLParser:
             "≝": "\\stackrel{\\tiny def}{=}",
             "≞": "\\stackrel{\\tiny m}{=}",
         }
+        replacements = {
+            "&lt;": "\\lt ",
+            "&gt;": "\\gt ",
+            "&le;": "\\leq ",
+            "&ge;": "\\geq ",
+            "∞": "\\infty ",
+            "<": "\\lt ",
+            ">": "\\gt ",
+            "≤": "\\leq ",
+            "≥": "\\geq ",
+        }
         text = root.text.split()
         if not text:
             return " "
         for i, t in enumerate(text):
             if t in symbol_map:
                 text[i] = symbol_map[t]
+        for key, value in replacements.items():
+            for i, t in enumerate(text):
+                text[i] = t.replace(key, value)
         return " ".join(text)
 
     def parse_acc(self, root: Element) -> str:
@@ -258,14 +272,24 @@ class OMMLParser:
 
     def parse_f(self, root: Element) -> str:
         text = "\\frac{"
+        num = ""
+        den = ""
+        is_binom = False
         for child in root:
+            if child.tag == qn("m:fPr"):
+                for child2 in child:
+                    if (
+                        child2.tag == qn("m:type")
+                        and child2.attrib.get(qn("m:val")) == "noBar"
+                    ):
+                        is_binom = True
             if child.tag == qn("m:num"):
-                text += self.parse(child)
-        text += "}{"
-        for child in root:
+                num = self.parse(child)
             if child.tag == qn("m:den"):
-                text += self.parse(child)
-        text += "}"
+                den = self.parse(child)
+        if is_binom:
+            text = "\\genfrac{}{}{0pt}{}{"
+        text += num + "}{" + den + "}"
         return text
 
     def parse_m(self, root: Element) -> str:

@@ -28,7 +28,7 @@ class TestSymbols(unittest.TestCase):
         )
         self.assertEqual(
             text,
-            "$ ±∞=≠~×÷!∝<≪>≫≤≥∓≅≈≡∀∁∂√∛∜∪∩∅%°℉℃∆∇∃∄∈∋←↑→↓↔∴+-¬αβγδεϵθϑμπρστφω*∙⋮⋯⋰⋱ℵℶ∎ $",
+            "$ ±\\infty =≠~×÷!∝\\lt ≪\\gt ≫\\leq \\geq ∓≅≈≡∀∁∂√∛∜∪∩∅%°℉℃∆∇∃∄∈∋←↑→↓↔∴+-¬αβγδεϵθϑμπρστφω*∙⋮⋯⋰⋱ℵℶ∎ $",
         )
 
     def test_greek_letters(self):
@@ -71,7 +71,7 @@ class TestSymbols(unittest.TestCase):
         )
         self.assertEqual(
             text,
-            "$ =≠<>≤≥≮≰≯≱≡∼≃≈≅≢≄≉≇∝≪≫∈∋∉⊂⊃⊆⊇≺≻≼≽⊏⊐⊑⊒∥⊥⊢⊣⋈≍ $",
+            "$ =≠\\lt \\gt \\leq \\geq ≮≰≯≱≡∼≃≈≅≢≄≉≇∝≪≫∈∋∉⊂⊃⊆⊇≺≻≼≽⊏⊐⊑⊒∥⊥⊢⊣⋈≍ $",
         )
 
     def test_basic_nary_operators(self):
