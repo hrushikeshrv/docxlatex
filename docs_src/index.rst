@@ -3,8 +3,8 @@
     You can adapt this file completely to your liking, but it should at least
     contain the root `toctree` directive.
 
-docxlatex documentation
-=======================
+About docxlatex
+===============
 docxlatex is a lightweight Python package for extracting text and mathematical equations from .docx files.
 
 It does **not** convert the entire .docx file to a LaTeX source file, only the inserted equations.
@@ -106,5 +106,6 @@ If you find a bug or have a feature request, please open an issue on the `GitHub
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
 
+   self
+   spec/index
