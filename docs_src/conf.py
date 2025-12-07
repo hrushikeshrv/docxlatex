@@ -33,6 +33,6 @@ exclude_patterns = []
 html_theme = "furo"
 html_static_path = ["_static"]
 html_theme_options = {
-    'sidebar_hide_name': False,
-    'navigation_with_keys': True,
+    "sidebar_hide_name": False,
+    "navigation_with_keys": True,
 }
